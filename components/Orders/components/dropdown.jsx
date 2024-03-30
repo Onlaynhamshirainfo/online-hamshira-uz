@@ -17,9 +17,10 @@ export default function Dropdown({
   getArrivalTypes,
   required,
   isLogo,
+  isActive,
 }) {
   const intl = useIntl();
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(isActive || false);
   const [checked, setChecked] = useState(false);
   const [activeInfo, setActiveInfo] = useState(currentDrop);
 
@@ -85,10 +86,12 @@ export default function Dropdown({
                       </svg>
                     </span>
                   </span>
+                  <span className="flex-1">
                   {item?.name ||
                     (item?.name?.trim() == currentDrop?.first_name
                       ? intl.formatMessage({ id: "me" })
                       : "")}
+                  </span>
                 </label>
               );
             })}
@@ -192,7 +195,7 @@ export default function Dropdown({
                   name={name}
                   serviceId={data?.id}
                   price={item?.value}
-                  current={!checked}
+                  // current={!checked}
                   key={index}
                   title={item?.info}
                   count={item?.count}

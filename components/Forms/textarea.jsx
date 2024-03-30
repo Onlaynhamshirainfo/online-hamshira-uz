@@ -24,7 +24,6 @@ export default function Textarea({
         placeholder={placeholder}
         name={name}
         id={name}
-        required
         autoComplete="off"
         className="px-5 py-4 border-grey-5 border bg-white  w-full placeholder:leading-normal placeholder:text-text-secondary placeholder:font-normal placeholder:text-base
         focus:border-green rounded-3xl resize-none min-h-[200px]"

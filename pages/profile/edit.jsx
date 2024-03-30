@@ -15,7 +15,7 @@ import axios from "../../utils/axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
-export default function ConnectsAdd() {
+export default function Edit() {
   const router = useRouter();
   const intl = useIntl();
   const [reqLoading, setReqLoading] = useState(false);
@@ -88,7 +88,7 @@ export default function ConnectsAdd() {
 
       reset();
     } catch (e) {
-      setFormError(e?.response?.data?.errors)
+      setFormError(e?.response?.data?.errors);
     } finally {
       setReqLoading(false);
     }

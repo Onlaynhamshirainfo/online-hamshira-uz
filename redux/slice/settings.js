@@ -37,9 +37,8 @@ const settingsSlice = createSlice({
     },
     changeItemsFromOrder: (state) => {
       if (typeof window !== "undefined") {
-        const orderRelatives = JSON.parse(
-          localStorage.getItem("orderRelatives")
-        );
+        const orderRelatives =
+          JSON.parse(localStorage.getItem("orderRelatives")) ?? "";
         const orderDates = JSON.parse(localStorage.getItem("orderDates"));
         const locationDetails = JSON.parse(
           localStorage.getItem("currentMapDetails")
@@ -50,23 +49,27 @@ const settingsSlice = createSlice({
         const totalPrice = localStorage.getItem("total__price");
         const items = JSON.parse(localStorage.getItem("illness__lists"));
         const photos = JSON.parse(localStorage.getItem("orderImages"));
+        const currentSpecialist = locationDetails?.specialities?.find(
+          (item) => item.id == specialistDetails?.id
+        );
 
-        state.orderInfo.relative_id =
-        state.info?.id == orderRelatives ? "" : Number(orderRelatives);
+        state.orderInfo.relative_id = orderRelatives;
         state.orderInfo = { ...state.orderInfo, ...orderDates };
         state.orderInfo.location_name = locationDetails?.display_name;
         state.orderInfo.latitude = locationDetails?.lat;
         state.orderInfo.longitude = locationDetails?.lon;
         state.orderInfo.branch_id = locationDetails?.branch?.id;
         state.orderInfo.speciality_id = specialistDetails?.id;
-        state.orderInfo.speciality_price = 20000;
-        state.orderInfo.price = Number(totalPrice);
-        state.orderInfo.items = items;
+        state.orderInfo.speciality_price = currentSpecialist?.price;
+        state.orderInfo.price = totalPrice
+          ? Number(totalPrice)
+          : currentSpecialist?.price;
+        state.orderInfo.items = items || [];
         state.orderInfo.patient_pictures = photos;
-        state.orderInfo.info = orderDates?.info_for_nurse;
+        state.orderInfo.info_for_nurse = orderDates?.info_for_nurse;
       }
     },
-    removeItemsFromLocal:(state) => {
+    removeItemsFromLocal: (state) => {
       localStorage.removeItem("total__price");
       localStorage.removeItem("illness__lists");
       localStorage.removeItem("orderImages");
@@ -77,12 +80,16 @@ const settingsSlice = createSlice({
       localStorage.removeItem("orderReasons");
       localStorage.removeItem("currentType");
       localStorage.removeItem("currentMapDetails");
+      localStorage.removeItem("orderRelativePerson");
     },
-
   },
 });
 
-export const { getItemsFromLocal, changeAllNews, changeItemsFromOrder,removeItemsFromLocal } =
-  settingsSlice.actions;
+export const {
+  getItemsFromLocal,
+  changeAllNews,
+  changeItemsFromOrder,
+  removeItemsFromLocal,
+} = settingsSlice.actions;
 
 export default settingsSlice.reducer;

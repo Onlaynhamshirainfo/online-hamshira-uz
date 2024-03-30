@@ -14,6 +14,7 @@ export default function Counter({
   current,
   id,
   name,
+  setActive,
 }) {
   const intl = useIntl();
   const dispatch = useDispatch();
@@ -21,36 +22,47 @@ export default function Counter({
   const [currentCount, setCurrentCount] = useState(count);
 
   const handleClick = (type) => {
-    if (current) {
-      toast.error(intl.formatMessage({ id: "servicesSelect" }));
-    } else {
-      if (type === "minus" && currentCount > 1) {
-        const newCount = currentCount - 1;
-        setCurrentCount(newCount);
-        setCurrentPrice(newCount * price);
-      } else if (type === "plus") {
-        const newCount = currentCount + 1;
-        const newPrice = newCount * price;
-        setCurrentCount(newCount);
-        setCurrentPrice(newPrice);
-        dispatch(
-          changePriceByButtons({
-            serviceId,
-            count: newCount,
-            price: newPrice,
-            id,
-            name: name,
-          })
-        );
-        dispatch(handleTotalSum());
-      }
+    // toast.error(intl.formatMessage({ id: "servicesSelect" }));
+    if (type === "minus" && currentCount > 1) {
+      const newCount = currentCount - 1;
+      const newPrice = newCount * price;
+      setCurrentCount(newCount);
+      setCurrentPrice(newPrice);
+      dispatch(
+        changePriceByButtons({
+          serviceId,
+          count: newCount,
+          price: newPrice,
+          id,
+          name: name,
+        })
+      );
+      dispatch(handleTotalSum());
+    } else if (type === "plus") {
+      const newCount = currentCount + 1;
+      const newPrice = newCount * price;
+      setCurrentCount(newCount);
+      setCurrentPrice(newPrice);
+      dispatch(
+        changePriceByButtons({
+          serviceId,
+          count: newCount,
+          price: newPrice,
+          id,
+          name: name,
+        })
+      );
+      dispatch(handleTotalSum());
     }
+    setTimeout(() => {
+      setActive(true);
+    }, 0);
   };
 
-  useEffect(() => {
-    setCurrentPrice(price * count);
-    setCurrentCount(count);
-  }, [current]);
+  // useEffect(() => {
+  //   setCurrentPrice(price * count);
+  //   setCurrentCount(count);
+  // }, [current]);
 
   return (
     <div className="flex flex-col items-start xs:items-end gap-1">

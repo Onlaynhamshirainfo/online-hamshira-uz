@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useIntl } from "react-intl";
+import { Error } from "..";
 
 export default function File({
   name,
@@ -8,6 +9,7 @@ export default function File({
   isMultiple = false,
   title,
   getImages,
+  errors
 }) {
   const intl = useIntl();
   const [images, setImages] = useState([]);
@@ -19,8 +21,8 @@ export default function File({
         toast.error("Only one file can be uploaded.");
         return;
       }
-      setImages([...selectedFiles]);
-      handleGetImages([...selectedFiles]);
+      setImages(selectedFiles); 
+      handleGetImages(selectedFiles); 
     } else {
       if (selectedFiles.length + images.length > 4) {
         toast.error("Maximum 4 images allowed.");
@@ -111,6 +113,8 @@ export default function File({
           </div>
         ))}
       </div>
+      {/* Erros */}
+      <Error errors={errors} name={name} />
     </div>
   );
 }

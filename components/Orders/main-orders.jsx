@@ -1,6 +1,6 @@
 import fetcher from "../../utils/fetcher";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import { useIntl } from "react-intl";
 import useSWR from "swr";
 import { OrderCardHome, RegsiterNow } from "..";
@@ -8,6 +8,7 @@ import { OrderCardHome, RegsiterNow } from "..";
 export default function MainOrders({ info }) {
   const intl = useIntl();
   const router = useRouter();
+  const [active, setActive] = useState(0);
 
   const { data: orders } = useSWR(
     [
@@ -27,9 +28,17 @@ export default function MainOrders({ info }) {
       )
   );
 
-  if(!info){
-    return  <RegsiterNow />
-  }
+  const handleTabs = (tab) => {
+    setActive(tab);
+  };
+
+  const filteredOrders = orders?.data?.filter((order) => {
+    if (active === 0) {
+      return true;
+    } else {
+      return order.status.int === active;
+    }
+  });
 
   return (
     <div className="container">
@@ -46,10 +55,41 @@ export default function MainOrders({ info }) {
             <></>
           )}
         </div>
+        <div className="flex flex-row flex-wrap items-end justify-center gap-5 sm:gap-10 text-text-primary font-medium">
+          <button
+            type="button"
+            className={`${active == 0 ? "border-b-2 border-b-green" : ""}`}
+            onClick={() => handleTabs(0)}
+          >
+            {intl.formatMessage({ id: "all" })}
+          </button>
+          <button
+            type="button"
+            className={`${active == 10 ? "border-b-2 border-b-green" : ""}`}
+            onClick={() => handleTabs(10)}
+          >
+            {intl.formatMessage({ id: "progress" })}
+          </button>
+          <button
+            type="button"
+            className={`${active == 12 ? "border-b-2 border-b-green" : ""}`}
+            onClick={() => handleTabs(12)}
+          >
+            {intl.formatMessage({ id: "done" })}
+          </button>
+        </div>
         <div className="flex flex-col w-full gap-3">
-          {orders?.data ? (
-            orders?.data?.map((item, index) => {
-              return <OrderCardHome data={item} key={index} />;
+          {filteredOrders ? (
+            filteredOrders?.map((item, index) => {
+              return (
+                <a
+                  href={`/${router.locale}/orders/single/${
+                    item?.id
+                  }/${localStorage.getItem("auth__key")}`}
+                >
+                  <OrderCardHome data={item} />
+                </a>
+              );
             })
           ) : (
             <></>

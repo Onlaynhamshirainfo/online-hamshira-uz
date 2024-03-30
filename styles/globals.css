@@ -93,8 +93,7 @@ img {
 .footer__active span svg path {
   fill: #242424;
 }
-
-/* scroll none */
+/* Hide scrollbar */
 .scroll__none {
   scrollbar-width: 0;
 }
@@ -103,41 +102,31 @@ img {
   width: 0;
 }
 
-/* input box */
+/* Input box styling */
 .input__box {
   position: relative;
-  z-index: 0;
-}
-.input__box input::placeholder {
-  opacity: 1;
-  transition: all 0.3s linear;
-}
-.input__box label {
-  transform: translate(0, -20px);
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  transition: all 0.3s linear;
-  background-color: white;
-}
-input:invalid + label {
-  opacity: 0;
 }
 
-.input__box input:focus + label {
-  transform: translate(0, -20px);
+.input__box label {
+  opacity: 0;
+  position: absolute;
+  top: -7px;
+  left: 20px;
+  transition: opacity 0.3s ease;
+  color: #1cc34b;
+}
+
+.input__box input:focus{
+  outline-color: #1cc34b;
+}
+
+.input__box input:focus + label,
+.input__box input:not(:placeholder-shown) + label {
   opacity: 1;
-  color: #0057ff;
 }
 
 .input__box input:focus::placeholder {
-  color: transparent;
-}
-.input__box input:focus::-webkit-input-placeholder {
-  color: transparent;
-}
-.input__box input:focus::-moz-placeholder {
-  color: transparent;
+  opacity: 0;
 }
 
 /* Custom Checkbox */

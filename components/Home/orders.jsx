@@ -33,7 +33,7 @@ export default function OrdersHome() {
   }
 
   return (
-    <section className="w-full 2xl:w-[1200px] mx-auto pl-5 2xl:px-0 flex flex-col gap-3">
+    <section className="w-full 2xl:w-[1200px] mx-auto pl-5 md:px-5 flex flex-col gap-3">
       <Title count={orders?.data?.length}>{intl.formatMessage({ id: "OrdersTitleHome" })}</Title>
       <div className="w-full">
         <Swiper
@@ -50,11 +50,11 @@ export default function OrdersHome() {
             576: {
               slidesPerView: 1.2,
             },
-            850: {
+            768: {
               slidesPerView: 1,
             },
             1200: {
-              slidesPerView: 1,
+              slidesPerView: 2,
             },
           }}
           className="orders"

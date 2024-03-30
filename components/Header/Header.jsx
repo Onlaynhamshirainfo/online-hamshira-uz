@@ -29,7 +29,7 @@ export default function Header() {
 
   return (
     <header className="container">
-      <div className="py-3 flex flex-row items-center justify-between">
+      <div className="py-3 flex flex-row items-center justify-between relative z-20">
         <a
           href="./"
           title={intl.formatMessage({ id: "company" })}
@@ -46,7 +46,7 @@ export default function Header() {
         </a>
         {info ? (
           <div
-            className="w-12 h-12 overflow-hidden rounded-full full__image"
+            className="w-12 h-12 overflow-hidden rounded-full full__image cursor-pointer"
             onClick={() => router.push("/profile")}>
             <Image
               src={`${process.env.NEXT_PUBLIC_IMAGE_BASE}${info?.photo}`}

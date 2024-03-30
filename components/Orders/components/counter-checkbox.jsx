@@ -34,9 +34,29 @@ export default function CounterCheckbox({
     } else {
       dispatch(removeFromCurrentPrice(item?.id));
     }
+    if(active){
+      dispatch(
+        changePriceByButtons({
+          serviceId,
+          count: 1,
+          price: 0,
+          id: item?.id,
+          name: item?.name,
+        })
+      );
+    }else{
+      dispatch(
+        changePriceByButtons({
+          serviceId,
+          count: 1,
+          price: price,
+          id: item?.id,
+          name: item?.name,
+        })
+      );
+    }
     dispatch(handleTotalSum());
   };
-
 
   return (
     <div className="flex flex-col xs:flex-row items-start xs:items-center justify-between gap-3">
@@ -75,6 +95,7 @@ export default function CounterCheckbox({
         serviceId={serviceId}
         price={price}
         current={!active}
+        setActive={setActive}
         id={item?.id}
         name={item?.name}
       />

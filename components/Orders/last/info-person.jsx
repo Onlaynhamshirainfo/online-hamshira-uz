@@ -15,20 +15,13 @@ export default function InfoPerson() {
 
   const relativeId =
     typeof window !== "undefined"
-      ? localStorage?.getItem("orderRelatives")
+      ? localStorage?.getItem("orderRelativePerson") !== "undefined"
+        ? JSON.parse(localStorage?.getItem("orderRelativePerson"))
+        : null
       : null;
 
-  const getRelatives = async () => {
-    const response = await authAxios.get(`relative/my-relatives`);
-    setActiveUser(response?.data?.data);
-  };
-
   useEffect(() => {
-    getRelatives();
     dispatch(changeItemsFromOrder());
-    if (activeUser?.find((item) => item.id == JSON.parse(relativeId))) {
-      setActive(activeUser?.find((item) => item.id == JSON.parse(relativeId)));
-    }
   }, [info]);
 
   const dataTimes = [
@@ -54,7 +47,9 @@ export default function InfoPerson() {
           />
         </div>
         <h3 className="font-medium text-base text-text-primary">
-          {active ? active?.type_name : intl.formatMessage({ id: "me" })}
+          {relativeId
+            ? relativeId?.type_name
+            : intl.formatMessage({ id: "me" })}
         </h3>
       </div>
       {/* time */}

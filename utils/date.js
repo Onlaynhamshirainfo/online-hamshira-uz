@@ -15,14 +15,20 @@ export function convertUnixFormat(date, hour) {
   const unixTimestamp = dateTime.getTime() / 1000;
   return unixTimestamp;
 }
-
 export function converUnivDate(date) {
-  const [day, month, year] = date.split('.');
-  const hour = '00:00';
-  const dateTimeString = `${year}-${month}-${day}T${hour}:00`;
+  const [day, month, year] = date.split("-");
+  const hour = "00:00";
+  const dateTimeString = `${year}-${month.padStart(2, "0")}-${day.padStart(
+    2,
+    "0"
+  )} ${hour}`;
   const dateTime = new Date(dateTimeString);
-  const unixTimestamp = dateTime.getTime() / 1000;
-  return unixTimestamp;
+  if (!isNaN(dateTime.getTime())) {
+    const unixTimestamp = dateTime.getTime() / 1000;
+    return unixTimestamp;
+  } else {
+    return null;
+  }
 }
 
 export function convertUnixToDate(unixTimestamp) {
@@ -43,7 +49,6 @@ export function convertUnixToDateWithHours(unixTimestamp) {
   const year = date.getFullYear();
   const hours = String(date.getHours()).padStart(2, "0");
   const minutes = String(date.getMinutes()).padStart(2, "0");
-
 
   return `${day}.${month}.${year}, ${hours}-${minutes}`;
 }

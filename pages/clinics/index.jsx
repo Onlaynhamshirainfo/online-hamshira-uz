@@ -30,7 +30,7 @@ export default function Clinics() {
         key={"onlayn hamshira , onlayn , hamshira"}
       />
       <div className="container">
-        <main className="flex flex-col gap-7 py-5">
+        <main className="flex flex-col gap-4 py-5">
           {info ? (
             clinics?.data ? (
               clinics?.data?.items?.map((item, index) => {

@@ -8,12 +8,16 @@ export default function OrderCardHome({ data, white }) {
     <div
       className={`flex flex-row items-center justify-between  rounded-2xl ${
         white ? "linear text-white" : "bg-white text-text-primary shadow-sm"
-      } p-5 w-full`}
+      } p-5 w-full min-h-[110px]`}
     >
       <div className="flex flex-row items-center gap-3 sm:gap-5">
-        <div className="w-12 sm:w-16 h-12 sm:h-16 rounded-full overflow-hidden">
+        <div className="w-12 sm:w-16 h-12 sm:h-16 rounded-full overflow-hidden full__image">
           <Image
-            src="/images/going-nurse.svg"
+            src={`${
+              data?.nurse
+                ? `${process.env.NEXT_PUBLIC_IMAGE_BASE}${data?.nurse?.photo}`
+                : "/images/going-nurse.svg"
+            }`}
             alt=""
             width={0}
             height={0}
@@ -22,7 +26,9 @@ export default function OrderCardHome({ data, white }) {
         </div>
         <div className="flex flex-col sm:gap-1">
           <h2 className="leading-normal font-medium text-sm sm:text-base flex-1">
-            {data?.nurse ? data?.nurse : intl.formatMessage({ id: "nurseNot" })}
+            {data?.nurse
+              ? data?.nurse?.first_name + ` ` + data?.nurse?.last_name
+              : intl.formatMessage({ id: "nurseNot" })}
           </h2>
           <div className="flex flex-row items-center gap-1">
             <svg

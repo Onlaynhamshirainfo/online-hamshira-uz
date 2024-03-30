@@ -1,9 +1,14 @@
 import { useIntl } from "react-intl";
 import Seo from "../../components/Seo/Seo";
-import { MainProfile, RegsiterNow, Settings } from "../../components";
+import {
+  LoaderPage,
+  MainProfile,
+  RegsiterNow,
+  Settings,
+} from "../../components";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-
+import { useEffect, useState } from "react";
 export default function Profile() {
   const router = useRouter();
   const intl = useIntl();
@@ -19,7 +24,7 @@ export default function Profile() {
       <main className="flex flex-col gap-7 py-5">
         {info ? (
           <>
-            <MainProfile info={info}/>
+            <MainProfile info={info} />
             <Settings />
           </>
         ) : (

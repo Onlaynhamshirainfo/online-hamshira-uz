@@ -22,6 +22,7 @@ export { default as Title } from "./Helper/title";
 export { default as Error } from "./Helper/error";
 export { default as ReturnBack } from "./Helper/return-back";
 export { default as DisabledInput } from "./Helper/disabled-input";
+export { default as LoaderPage } from "./Helper/loader-page";
 
 // Card
 export { default as OrderCardHome } from "./Card/order-home";

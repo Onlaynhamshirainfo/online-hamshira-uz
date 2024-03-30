@@ -70,12 +70,12 @@ export default function SliderModal() {
           return (
             <SwiperSlide
               key={index}
-              className="w-full h-full"
+              className="w-full h-full bg-grey-7"
               style={{
                 backgroundImage: `url(${process.env.NEXT_PUBLIC_IMAGE_BASE}${item?.url})`,
                 backgroundSize: `cover`,
               }}>
-              <div className="w-11/12 small:w-[85%] mx-auto h-full flex flex-col items-center justify-end gap-2 text-white text-center pb-[140px]">
+              <div className="w-11/12 small:w-[85%] mx-auto h-full flex flex-col items-center justify-end gap-2 text-white text-center pb-[140px] ">
                 <h1 className="leading-normal font-bold text-xl sm:text-2xl">
                   {item?.title}
                 </h1>

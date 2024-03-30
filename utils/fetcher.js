@@ -27,5 +27,12 @@ export default function fetcher(
     __url.searchParams.append(key, params[key])
   );
 
-  return fetch(__url, updateOptions(options, auth)).then((res) => res.json());
+  return fetch(__url, updateOptions(options, auth)).then((res) => {
+    if (res.status === 401) {
+      localStorage.removeItem("auth__key");
+      localStorage.removeItem("auth__phone");
+      localStorage.removeItem("auth__info");
+    }
+    return res.json();
+  });
 }

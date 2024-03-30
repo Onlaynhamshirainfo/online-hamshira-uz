@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { YMaps, Map, Placemark } from "@pbe/react-yandex-maps";
+import {
+  YMaps,
+  Map,
+  Placemark,
+  GeolocationControl,
+  ZoomControl,
+} from "@pbe/react-yandex-maps";
 
 const MapWithPlacemark = ({ onLocationSelect }) => {
   const [placemarkGeometry, setPlacemarkGeometry] = useState(null);
@@ -7,6 +13,14 @@ const MapWithPlacemark = ({ onLocationSelect }) => {
   const handleMapClick = (event) => {
     setPlacemarkGeometry(event.get("coords"));
     onLocationSelect(event.get("coords"));
+  };
+
+  const handleGeoLocationClick = () => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const { latitude, longitude } = position.coords;
+      setPlacemarkGeometry([latitude, longitude]);
+      onLocationSelect([latitude, longitude]);
+    });
   };
 
   return (
@@ -17,7 +31,8 @@ const MapWithPlacemark = ({ onLocationSelect }) => {
           width="100%"
           height="100%"
           options={{ mapType: "yandex#hybrid" }}
-          onClick={handleMapClick}>
+          onClick={handleMapClick}
+        >
           {placemarkGeometry && (
             <Placemark
               geometry={placemarkGeometry}
@@ -29,6 +44,11 @@ const MapWithPlacemark = ({ onLocationSelect }) => {
               }}
             />
           )}
+          <ZoomControl options={{ float: "right" }} />
+          <GeolocationControl
+            options={{ float: "right" }}
+            onClick={handleGeoLocationClick}
+          />
         </Map>
       </YMaps>
     </div>

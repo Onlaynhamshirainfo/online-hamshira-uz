@@ -28,16 +28,6 @@ export default function InfoForm() {
     },
   });
 
-  const submitFn = async (data) => {
-    localStorage.setItem("orderReasons", JSON.stringify(data?.reason || {}));
-    localStorage.setItem("orderRelatives", JSON.stringify(data?.relative_id));
-    router.push(`/${router.locale}/orders/create/second-step`);
-  };
-
-  const handleGetImages = (images) => {
-    localStorage.setItem("orderImages", JSON.stringify(images));
-  };
-
   const { data: relatives } = useSWR(
     ["relative/my-relatives", router.locale],
     (url) =>
@@ -67,6 +57,23 @@ export default function InfoForm() {
         true
       )
   );
+
+  const submitFn = async (data) => {
+    localStorage.setItem("orderReasons", JSON.stringify(data?.reason || {}));
+    localStorage.setItem("orderRelatives", JSON.stringify(data?.relative_id));
+    localStorage.setItem(
+      "orderRelativePerson",
+      JSON.stringify(
+        relatives?.data?.find((item) => item.id == data?.relative_id)
+      )
+    );
+    router.push(`/${router.locale}/orders/create/second-step`);
+  };
+
+  const handleGetImages = (images) => {
+    const imageNames = images.map((image) => image.name);
+    localStorage.setItem("orderImages", JSON.stringify(imageNames));
+  };
 
   const relativesData = [info];
   if (relatives?.data) {

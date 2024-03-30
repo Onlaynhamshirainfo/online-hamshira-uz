@@ -17,7 +17,12 @@ export default function Orders() {
         key={"onlayn hamshira , onlayn , hamshira"}
       />
       <main className="flex flex-col gap-7 py-5">
-        <MainOrders info={info}/>
+        {
+          info ?
+          <MainOrders info={info}/>
+          :
+          <RegsiterNow />
+        }
       </main>
     </>
   );

@@ -13,8 +13,9 @@ import {
   ContactUs,
   OrderType,
   OrderCancel,
+  LoaderPage,
 } from "../../components";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   changeLangStartModal,
@@ -26,10 +27,14 @@ const Layout = ({ children }) => {
   const { sliderModal, infoModal, orderCancel } = useSelector(
     (state) => state.modals
   );
+  const [active, setActive] = useState(true);
 
   useEffect(() => {
     dispatch(changeLangStartModal());
     dispatch(changeSliderModal());
+    setTimeout(() => {
+      setActive(false);
+    } , 500)
   }, []);
 
   return (
@@ -89,11 +94,15 @@ const Layout = ({ children }) => {
 
       {/* Body */}
       <div className="wrapper">
-        <div className="app">
+        <div className="app relative z-0">
           {/* Header */}
           <Header />
 
-          <div className="content-wrapper">{children}</div>
+          {active ? (
+            <LoaderPage />
+          ) : (
+            <div className="content-wrapper">{children}</div>
+          )}
 
           {/* Footer */}
           <Footer />

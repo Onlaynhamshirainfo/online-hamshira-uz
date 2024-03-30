@@ -29,6 +29,16 @@ function page({ info, params }) {
       <main className="flex flex-col items-start leading-normal gap-3 sm:gap-5">
         <Title>{intl.formatMessage({ id: "orderInfo" })}</Title>
         <div className="w-full flex flex-col gap-3">
+          {info?.nurse?.id ? (
+            <DisabledInput
+              title={intl.formatMessage({ id: "nurse" })}
+              value={
+                `${info?.nurse?.first_name} ${info?.nurse?.last_name} ${info?.nurse?.phone}`
+              }
+            />
+          ) : (
+            <></>
+          )}
           <DisabledInput
             title={intl.formatMessage({ id: "bemor" })}
             value={
@@ -73,9 +83,13 @@ function page({ info, params }) {
             total={info?.price}
           />
           {/* <div className="grid grid-cols-1 gap-5 sm:grid-cols-2"> */}
-          <Button onClick={() => dispatch(toggleOrderCancelModal(info?.id))}>
-            {intl.formatMessage({ id: "cancel" })}
-          </Button>
+          {info?.status?.int == 12 ? (
+            <></>
+          ) : (
+            <Button onClick={() => dispatch(toggleOrderCancelModal(info?.id))}>
+              {intl.formatMessage({ id: "cancel" })}
+            </Button>
+          )}
           {/* </div> */}
         </div>
       </main>

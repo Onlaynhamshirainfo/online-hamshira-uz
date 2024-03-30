@@ -14,7 +14,6 @@ import fetcher from "../../utils/fetcher";
 export default function Connects() {
   const router = useRouter();
   const intl = useIntl();
-  const { info } = useSelector((state) => state.settings);
 
   const { data: relatives } = useSWR(
     ["relative/my-relatives", router.locale],

@@ -82,13 +82,17 @@ export default function IllnessLists() {
               key={index}
               typeDropdown={"illness"}
               name={"items"}
+              isActive={index == 0}
             />
           );
         })
       ) : (
         <></>
       )}
-      <div className="p-5 bg-white rounded-3xl flex items-center justify-between w-full text-text-primary mt-20">
+      <div
+        className="p-5 bg-white rounded-3xl flex items-center justify-between w-full 
+        text-text-primary mt-20"
+      >
         <h3 className="font-semibold text-sm sm:text-base">
           {intl.formatMessage({ id: "total" })}:
         </h3>
