@@ -32,9 +32,7 @@ function page({ info, params }) {
           {info?.nurse?.id ? (
             <DisabledInput
               title={intl.formatMessage({ id: "nurse" })}
-              value={
-                `${info?.nurse?.first_name} ${info?.nurse?.last_name} ${info?.nurse?.phone}`
-              }
+              value={`${info?.nurse?.first_name} ${info?.nurse?.last_name} ${info?.nurse?.phone}`}
             />
           ) : (
             <></>
@@ -42,7 +40,8 @@ function page({ info, params }) {
           <DisabledInput
             title={intl.formatMessage({ id: "bemor" })}
             value={
-              info?.relative?.type_name || intl.formatMessage({ id: "me" })
+              `${info?.relative?.type_name} (${info?.relative?.fullname})` ||
+              intl.formatMessage({ id: "me" })
             }
           />
           <DisabledInput

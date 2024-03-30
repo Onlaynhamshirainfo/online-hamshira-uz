@@ -82,7 +82,7 @@ export default function InfoForm() {
 
   const transformedRelativesData = relativesData.map((rel) => ({
     id: rel?.id,
-    name: rel?.first_name ? intl.formatMessage({ id: "me" }) : rel?.type_name,
+    name: rel?.first_name ? intl.formatMessage({ id: "me" }) : `${rel?.type_name} (${rel?.fullname})`,
     photo: rel?.photo ? rel?.photo : "/admin/images/defaultAvatar.png",
   }));
 

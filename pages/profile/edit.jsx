@@ -14,6 +14,7 @@ import Button from "../../components/Forms/button";
 import axios from "../../utils/axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import toast from "react-hot-toast";
 
 export default function Edit() {
   const router = useRouter();
@@ -29,49 +30,53 @@ export default function Edit() {
     reset,
   } = useForm({
     defaultValues: {
-      type: "",
-      fullname: "",
-      birthday: "",
-      weight: "",
-      gender: "",
-      about: "",
-      picture_file: "",
+      first_name: info?.first_name || "",
+      last_name: info?.last_name || "",
+      father_name: info?.father_name || "",
+      weight: info?.contact?.weight || "",
+      gender: info?.contact?.gender || "",
+      branch_id: info?.contact?.branch?.id || "",
+      photo: info?.photo || "",
+      born: info?.contact?.born || "",
     },
   });
 
-  const { data: types } = useSWR(["relative/type", router.locale], (url) =>
-    fetcher(
-      url,
-      {
-        headers: {
-          "Accept-Language": router.locale,
-        },
+  const { data: branches } = useSWR(["branch/index", router.locale], (url) =>
+    fetcher(url, {
+      headers: {
+        "Accept-Language": router.locale,
       },
-      {},
-      true
-    )
+    })
   );
 
   const submitFn = async (data) => {
-    const date = converUnivDate(data?.birthday);
+    const date = converUnivDate(data?.born);
     try {
       const formData = new FormData();
-      formData.append("fullname", data?.fullname);
-      formData.append("birthday", Number(date));
+      formData.append("first_name", data?.first_name);
+      formData.append("last_name", data?.last_name);
+      formData.append("born", Number(date));
       formData.append("weight", data?.weight);
       formData.append("gender", data?.gender);
-      formData.append("about", data?.about);
-      formData.append("type", data?.type);
-      formData.append("picture_file", image);
+      formData.append("photo", image || data?.photo);
+      formData.append(
+        "branch_id",
+        data?.branch_id || info?.contact?.branch?.id
+      );
 
       setReqLoading(true);
       setFormError(null);
 
-      const response = await axios.post(`relative/create`, formData, {
+      const response = await axios.post(`client/fill-data`, formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("auth__key")}`,
         },
       });
+
+      const oldDatas = JSON.parse(localStorage.getItem("auth__info"));
+      const newDatas = { ...oldDatas, ...response?.data?.data };
+      localStorage.setItem("auth__info", JSON.stringify(newDatas));
+      localStorage.setItem("auth__key", newDatas?.auth_key);
 
       const MySwal = withReactContent(Swal);
       MySwal.fire({
@@ -83,12 +88,14 @@ export default function Edit() {
       });
 
       setTimeout(() => {
-        router.push(`/${router.locale}/profile/connects`);
+        router.push(`/${router.locale}/profile/`);
+        router.reload();
       }, 500);
 
       reset();
     } catch (e) {
       setFormError(e?.response?.data?.errors);
+      toast.error(e?.response?.data?.name || e?.message);
     } finally {
       setReqLoading(false);
     }
@@ -106,39 +113,39 @@ export default function Edit() {
 
   return (
     <>
+      {console.log(formError)}
       <Seo
-        title={intl.formatMessage({ id: "orders" })}
+        title={intl.formatMessage({ id: "edit" })}
         description={""}
         key={"onlayn hamshira , onlayn , hamshira"}
       />
-      {console.log(formError)}
       <div className="container">
         <form
           onSubmit={handleSubmit(submitFn)}
-          className="flex flex-col gap-3 py-5"
+          className="flex flex-col gap-3 py-5 items-start"
         >
-          <ReturnBack url="profile/connects" />
-          <Dropdown
-            data={types?.data}
+          <ReturnBack url="profile" />
+          <Input
+            type="text"
+            placeholder={intl.formatMessage({ id: "firstName" })}
+            name={"first_name"}
+            id="first_name"
             register={register}
-            name={"type"}
-            title={intl.formatMessage({ id: "relative" })}
-            isLogo
-            typeDropdown={"city"}
+            errors={formError}
           />
           <Input
             type="text"
-            placeholder={intl.formatMessage({ id: "fullname" })}
-            name={"fullname"}
-            id="fullname"
+            placeholder={intl.formatMessage({ id: "lastName" })}
+            name={"last_name"}
+            id="last_name"
             register={register}
             errors={formError}
           />
           <Input
             type="date"
             placeholder={intl.formatMessage({ id: "birthday" })}
-            name={"birthday"}
-            id="birthday"
+            name={"born"}
+            id="born"
             register={register}
             errors={formError}
           />
@@ -150,17 +157,17 @@ export default function Edit() {
             register={register}
             errors={formError}
           />
-          <Input
-            type="text"
-            placeholder={intl.formatMessage({ id: "about" })}
-            name={"about"}
-            id="about"
+          {/* <Dropdown
+            data={branches?.data}
             register={register}
-            errors={formError}
-          />
+            name={"branch_id"}
+            title={intl.formatMessage({ id: "city" })}
+            isLogo
+            typeDropdown={"city"}
+          /> */}
           <File
-            id={"picture_file"}
-            name={"picture_file"}
+            id={"photo"}
+            name={"photo"}
             title={intl.formatMessage({ id: "profileImage" })}
             getImages={handleGetImages}
             errors={formError}
@@ -175,12 +182,17 @@ export default function Edit() {
                   name={"gender"}
                   key={index}
                   item={item}
+                  current={info?.contact?.gender}
                   register={register}
                 />
               );
             })}
           </div>
-          <Button type="submit">{intl.formatMessage({ id: "add" })}</Button>
+          <Button type="submit">
+            {reqLoading
+              ? intl.formatMessage({ id: "loading" })
+              : intl.formatMessage({ id: "edit" })}
+          </Button>
         </form>
       </div>
     </>

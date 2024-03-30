@@ -6,6 +6,7 @@ export default function CheckboxChecked({
   item,
   validation,
   register,
+  current,
 }) {
   return (
     <label

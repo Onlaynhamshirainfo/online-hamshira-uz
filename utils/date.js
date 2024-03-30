@@ -16,7 +16,7 @@ export function convertUnixFormat(date, hour) {
   return unixTimestamp;
 }
 export function converUnivDate(date) {
-  const [day, month, year] = date.split("-");
+  const [day, month, year] = date?.split("-") ?? date?.split("/");
   const hour = "00:00";
   const dateTimeString = `${year}-${month.padStart(2, "0")}-${day.padStart(
     2,

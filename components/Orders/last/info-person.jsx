@@ -48,7 +48,7 @@ export default function InfoPerson() {
         </div>
         <h3 className="font-medium text-base text-text-primary">
           {relativeId
-            ? relativeId?.type_name
+            ? `${relativeId?.type_name} (${relativeId?.fullname})`
             : intl.formatMessage({ id: "me" })}
         </h3>
       </div>

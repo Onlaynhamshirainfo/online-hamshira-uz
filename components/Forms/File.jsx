@@ -44,7 +44,7 @@ export default function File({
   };
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 w-full">
       <p className="font-semibold text-sm">{title}</p>
       <div className="relative z-0 bg-white p-5 flex flex-row items-center justify-between rounded-3xl ">
         <input
