@@ -12,6 +12,8 @@ import axios from "../../utils/axios";
 import useSWR from "swr";
 import fetcher from "../../utils/fetcher";
 import CheckboxChecked from "./components/checkbox";
+import { converUnivDate } from "../../utils/date";
+import toast from "react-hot-toast";
 
 export default function InfoModal() {
   const { infoModal } = useSelector((state) => state.modals);
@@ -37,7 +39,7 @@ export default function InfoModal() {
       last_name: "",
       gender: "",
       branch_id: "",
-      birthday: "",
+      born: "",
       // photo: "",
     },
   });
@@ -46,14 +48,15 @@ export default function InfoModal() {
     try {
       setReqLoading(true);
       setFormError(null);
-      const response = axios.post(
+      const date = converUnivDate(data?.born)
+      const response = await axios.post(
         `client/fill-data?expand=contact.branch`,
         {
           first_name: data?.first_name,
           last_name: data?.last_name,
           gender: Number(data?.gender),
           branch_id: Number(data?.branch_id),
-          born: data?.born,
+          born: Number(date),
         },
         {
           headers: {
@@ -71,6 +74,8 @@ export default function InfoModal() {
 
       reset();
     } catch (e) {
+      toast.error(e?.response?.data?.name);
+      setFormError(e?.response?.data?.errors)
     } finally {
       setReqLoading(false);
     }
@@ -158,7 +163,7 @@ export default function InfoModal() {
         </div>
         <Button type="submit">
           {reqLoading
-            ? intl.formatMessage({ id: "sending" })
+            ? intl.formatMessage({ id: "loading" })
             : intl.formatMessage({ id: "continue" })}
         </Button>
       </form>
