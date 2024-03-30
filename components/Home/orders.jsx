@@ -34,7 +34,9 @@ export default function OrdersHome() {
 
   return (
     <section className="w-full 2xl:w-[1200px] mx-auto pl-5 md:px-5 2xl:px-0 flex flex-col gap-3">
-      <Title count={orders?.data?.length}>{intl.formatMessage({ id: "OrdersTitleHome" })}</Title>
+      <Title count={orders?.data?.length}>
+        {intl.formatMessage({ id: "OrdersTitleHome" })}
+      </Title>
       <div className="w-full">
         <Swiper
           slidesPerView={3}
@@ -59,17 +61,28 @@ export default function OrdersHome() {
           }}
           className="orders"
         >
-          {orders?.data?.map((item, index) => {
-            return (
-              <SwiperSlide key={index}>
-                <a href={`/${router.locale}/orders/single/${item?.id}/${localStorage.getItem("auth__key")}`}>
-                  <OrderCardHome data={item} white />
-                </a>
+          {orders?.data ? (
+            orders?.data?.map((item, index) => {
+              return (
+                <SwiperSlide key={index}>
+                  <a
+                    href={`/${router.locale}/orders/single/${
+                      item?.id
+                    }/${localStorage.getItem("auth__key")}`}
+                  >
+                    <OrderCardHome data={item} white />
+                  </a>
+                </SwiperSlide>
+              );
+            })
+          ) : (
+            <>
+              <SwiperSlide>
+                <OrderHomeSkeleton />
               </SwiperSlide>
-            );
-          })}
+            </>
+          )}
         </Swiper>
-        {/* <OrderHomeSkeleton /> */}
       </div>
     </section>
   );

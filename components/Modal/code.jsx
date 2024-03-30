@@ -50,6 +50,8 @@ export default function CodeModal() {
           setTimeout(() => {
             dispatch(toggleInfoModal());
           }, 300);
+        }else{
+          router.reload();
         }
       }
     } catch (e) {

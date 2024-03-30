@@ -70,6 +70,7 @@ export default function InfoModal() {
       toast.success(intl.formatMessage({ id: "infoSuccess" }));
       setTimeout(() => {
         dispatch(toggleInfoModal());
+        router.reload();
       }, 100);
 
       reset();
