@@ -55,29 +55,33 @@ export default function MainOrders({ info }) {
             <></>
           )}
         </div>
-        <div className="flex flex-row flex-wrap items-end justify-center gap-5 sm:gap-10 text-text-primary font-medium">
-          <button
-            type="button"
-            className={`${active == 0 ? "border-b-2 border-b-green" : ""}`}
-            onClick={() => handleTabs(0)}
-          >
-            {intl.formatMessage({ id: "all" })}
-          </button>
-          <button
-            type="button"
-            className={`${active == 10 ? "border-b-2 border-b-green" : ""}`}
-            onClick={() => handleTabs(10)}
-          >
-            {intl.formatMessage({ id: "progress" })}
-          </button>
-          <button
-            type="button"
-            className={`${active == 12 ? "border-b-2 border-b-green" : ""}`}
-            onClick={() => handleTabs(12)}
-          >
-            {intl.formatMessage({ id: "done" })}
-          </button>
-        </div>
+        {orders?.data && orders?.data?.length > 0 ? (
+          <div className="flex flex-row flex-wrap items-end justify-center gap-5 sm:gap-10 text-text-primary font-medium">
+            <button
+              type="button"
+              className={`${active == 0 ? "border-b-2 border-b-green" : ""}`}
+              onClick={() => handleTabs(0)}
+            >
+              {intl.formatMessage({ id: "all" })}
+            </button>
+            <button
+              type="button"
+              className={`${active == 10 ? "border-b-2 border-b-green" : ""}`}
+              onClick={() => handleTabs(10)}
+            >
+              {intl.formatMessage({ id: "progress" })}
+            </button>
+            <button
+              type="button"
+              className={`${active == 12 ? "border-b-2 border-b-green" : ""}`}
+              onClick={() => handleTabs(12)}
+            >
+              {intl.formatMessage({ id: "done" })}
+            </button>
+          </div>
+        ) : (
+          <></>
+        )}
         <div className="flex flex-col w-full gap-3">
           {filteredOrders ? (
             filteredOrders?.map((item, index) => {

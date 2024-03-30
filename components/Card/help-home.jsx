@@ -4,13 +4,10 @@ import {
 } from "../../redux/slice/modals";
 import Image from "next/image";
 import React from "react";
-import toast from "react-hot-toast";
-import { useIntl } from "react-intl";
 import { useDispatch } from "react-redux";
 
-export default function HelpCardHome({ data, ...pageProps }) {
+export default function HelpCardHome({ data }) {
   const dispatch = useDispatch();
-  const intl = useIntl();
 
   const helpedModalFn = () => {
     const quest =
@@ -25,7 +22,8 @@ export default function HelpCardHome({ data, ...pageProps }) {
   return (
     <button
       className="w-full bg-white rounded-2xl flex flex-col items-center text-center justify-center gap-2 py-6 px-2 cursor-pointer"
-      onClick={() => helpedModalFn()}>
+      onClick={() => helpedModalFn()}
+    >
       <Image
         src={`${process.env.NEXT_PUBLIC_IMAGE_BASE}${data?.icon}`}
         width={56}
