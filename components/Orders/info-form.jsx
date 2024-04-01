@@ -3,11 +3,13 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useIntl } from "react-intl";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useSWR from "swr";
 import { Dropdown, File } from "..";
 import Selection from "./components/selection";
 import Button from "../Forms/button";
+import { changeOrderImages } from "../../redux/slice/settings";
+import { useFiles } from "../../context/useFiles";
 
 export default function InfoForm() {
   const intl = useIntl();
@@ -27,6 +29,8 @@ export default function InfoForm() {
       relative_id: "",
     },
   });
+  const dispatch = useDispatch();
+  const { setFiles } = useFiles();
 
   const { data: relatives } = useSWR(
     ["relative/my-relatives", router.locale],
@@ -71,8 +75,21 @@ export default function InfoForm() {
   };
 
   const handleGetImages = (images) => {
-    const imageNames = images.map((image) => image.name);
-    localStorage.setItem("orderImages", JSON.stringify(imageNames));
+    const imgObjects = images.map((image) => ({
+      lastModified: image?.lastModified,
+      lastModifiedDate: image?.lastModifiedDate,
+      name: image?.name,
+      size: image?.size,
+      type: image?.type,
+      webkitRelativePath: image?.webkitRelativePath,
+    }));
+    setFiles(images);
+    // const imgObjects = images.map((image) => URL.createObjectURL(image));
+    // let fileObjects = images.map((file) => new File([file], file.name));
+    // dispatch(changeOrderImages(imgObjects));
+    // console.error(imgObjects);
+    // const imgObjects = images.map((image) => image?.name);
+    localStorage.setItem("orderImages", JSON.stringify(imgObjects));
   };
 
   const relativesData = [info];
@@ -82,7 +99,9 @@ export default function InfoForm() {
 
   const transformedRelativesData = relativesData.map((rel) => ({
     id: rel?.id,
-    name: rel?.first_name ? intl.formatMessage({ id: "me" }) : `${rel?.type_name} (${rel?.fullname})`,
+    name: rel?.first_name
+      ? intl.formatMessage({ id: "me" })
+      : `${rel?.type_name} (${rel?.fullname})`,
     photo: rel?.photo ? rel?.photo : "/admin/images/defaultAvatar.png",
   }));
 

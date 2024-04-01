@@ -31,18 +31,18 @@ export default function Header() {
     <header className="container">
       <div className="py-3 flex flex-row items-center justify-between relative z-20">
         <a
-          href="./"
+          href="/"
           title={intl.formatMessage({ id: "company" })}
           className="block w-[180px] sm:w-[240px]"
         >
-          <img
+          <Image
             src="/images/logo.svg"
             alt="logo"
             title={intl.formatMessage({ id: "company" })}
-            width={240}
-            height={140}
+            width={200}
+            height={60}
             // blurdataurl="data:image/jpeg ,data:image/png , data:image/svg "
-            placeholder="blur"
+            // placeholder="blur"
           />
         </a>
         {info ? (

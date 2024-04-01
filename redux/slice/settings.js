@@ -7,6 +7,7 @@ const settingsSlice = createSlice({
     news: [],
     currentNews: null,
     orderInfo: {},
+    orderImages: [],
   },
   reducers: {
     getItemsFromLocal: (state) => {
@@ -48,12 +49,15 @@ const settingsSlice = createSlice({
         );
         const totalPrice = localStorage.getItem("total__price");
         const items = JSON.parse(localStorage.getItem("illness__lists"));
-        const photos = JSON.parse(localStorage.getItem("orderImages"));
         const currentSpecialist = locationDetails?.specialities?.find(
           (item) => item.id == specialistDetails?.id
         );
 
-        state.orderInfo.relative_id = orderRelatives;
+        const photos = JSON.parse(localStorage.getItem("orderImages"));
+        // const photos = ["photo_2023-11-05_23-46-07.jpg"]; // Assuming you have file paths or URLs
+
+        state.orderInfo.relative_id =
+          orderRelatives == state.info.id ? "" : orderRelatives;
         state.orderInfo = { ...state.orderInfo, ...orderDates };
         state.orderInfo.location_name = locationDetails?.display_name;
         state.orderInfo.latitude = locationDetails?.lat;
@@ -82,6 +86,9 @@ const settingsSlice = createSlice({
       localStorage.removeItem("currentMapDetails");
       localStorage.removeItem("orderRelativePerson");
     },
+    changeOrderImages: (state, action) => {
+      state.orderImages = action.payload;
+    },
   },
 });
 
@@ -90,6 +97,7 @@ export const {
   changeAllNews,
   changeItemsFromOrder,
   removeItemsFromLocal,
+  changeOrderImages
 } = settingsSlice.actions;
 
 export default settingsSlice.reducer;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useIntl } from "react-intl";
-import { Error } from "..";
+import { CustomImage, Error } from "..";
 
 export default function File({
   name,
@@ -9,7 +9,7 @@ export default function File({
   isMultiple = false,
   title,
   getImages,
-  errors
+  errors,
 }) {
   const intl = useIntl();
   const [images, setImages] = useState([]);
@@ -21,8 +21,8 @@ export default function File({
         toast.error("Only one file can be uploaded.");
         return;
       }
-      setImages(selectedFiles); 
-      handleGetImages(selectedFiles); 
+      setImages(selectedFiles);
+      handleGetImages(selectedFiles);
     } else {
       if (selectedFiles.length + images.length > 4) {
         toast.error("Maximum 4 images allowed.");
@@ -87,13 +87,18 @@ export default function File({
         {images.map((image, index) => (
           <div
             key={index}
-            className="flex items-center gap-2 bg-white p-3 rounded-full"
+            className="relative z-0 border-2 border-grey-5 rounded-xl"
           >
-            <span className="text-sm leading-normal font-medium">
-              {image.name}
-            </span>
+            <div className="w-16 h-16 rounded-xl full__image overflow-hidden relative z-0">
+              {/* {image.name} */}
+              <CustomImage
+                src={URL.createObjectURL(image)}
+                alt={image?.name}
+                title={image?.name}
+              />
+            </div>
             <button
-              className=""
+              className="absolute -top-2 -right-2"
               type="button"
               onClick={() => handleDeleteImage(index)}
             >
@@ -106,7 +111,7 @@ export default function File({
               >
                 <path
                   d="M9.99996 1.66675C5.40829 1.66675 1.66663 5.40841 1.66663 10.0001C1.66663 14.5917 5.40829 18.3334 9.99996 18.3334C14.5916 18.3334 18.3333 14.5917 18.3333 10.0001C18.3333 5.40841 14.5916 1.66675 9.99996 1.66675ZM12.8 11.9167C13.0416 12.1584 13.0416 12.5584 12.8 12.8001C12.675 12.9251 12.5166 12.9834 12.3583 12.9834C12.2 12.9834 12.0416 12.9251 11.9166 12.8001L9.99996 10.8834L8.08329 12.8001C7.95829 12.9251 7.79996 12.9834 7.64163 12.9834C7.48329 12.9834 7.32496 12.9251 7.19996 12.8001C6.95829 12.5584 6.95829 12.1584 7.19996 11.9167L9.11663 10.0001L7.19996 8.08342C6.95829 7.84175 6.95829 7.44175 7.19996 7.20008C7.44163 6.95842 7.84163 6.95842 8.08329 7.20008L9.99996 9.11675L11.9166 7.20008C12.1583 6.95842 12.5583 6.95842 12.8 7.20008C13.0416 7.44175 13.0416 7.84175 12.8 8.08342L10.8833 10.0001L12.8 11.9167Z"
-                  fill="#636C79"
+                  fill="#1cc34b"
                 />
               </svg>
             </button>

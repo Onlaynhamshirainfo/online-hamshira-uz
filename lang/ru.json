@@ -43,6 +43,7 @@
   "address": "Адрес",
   "services": "Услуги",
   "orderCancel": "Выберите причину отмены заказа",
+  "photos": "Фото",
   "--InputMessage": "",
   "phoneMessage": "Введите свой номер телефона",
   "codeMessage": "СМС отправлено для подтверждения:",

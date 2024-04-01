@@ -66,6 +66,7 @@ export default function ConnectsAdd() {
 
       setReqLoading(true);
       setFormError(null);
+      console.error(image)
 
       const response = await axios.post(`relative/create`, formData, {
         headers: {

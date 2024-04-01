@@ -34,7 +34,7 @@ const Layout = ({ children }) => {
     dispatch(changeSliderModal());
     setTimeout(() => {
       setActive(false);
-    } , 500)
+    }, 500);
   }, []);
 
   return (
@@ -122,6 +122,9 @@ const Layout = ({ children }) => {
 
       {/* Nav Bottom */}
       {/* <NavBottom /> */}
+
+      <script src="https://telegram.org/js/telegram-web-app.js"></script>
+      <script src="/js/telegram.js"></script>
 
       {/* Scripts */}
       {/* <Script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"></Script> */}

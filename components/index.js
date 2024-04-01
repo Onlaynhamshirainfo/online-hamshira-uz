@@ -23,6 +23,7 @@ export { default as Error } from "./Helper/error";
 export { default as ReturnBack } from "./Helper/return-back";
 export { default as DisabledInput } from "./Helper/disabled-input";
 export { default as LoaderPage } from "./Helper/loader-page";
+export { default as ImagesCards } from "./Helper/images-card";
 
 // Card components
 export { default as OrderCardHome } from "./Card/order-home";
@@ -62,7 +63,7 @@ export { default as CurrentMap } from "./Orders/current-map";
 export { default as MapForms } from "./Orders/map-forms";
 export { default as IllnessLists } from "./Orders/illness-lists";
 
-// Orders -- last page 
+// Orders -- last page
 export { default as InfoPerson } from "./Orders/last/info-person";
 export { default as InfoIllness } from "./Orders/last/info-illness";
 

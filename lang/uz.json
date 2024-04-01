@@ -42,6 +42,7 @@
   "address":"Manzil",
   "services": "Xizmatlar",
   "orderCancel":"Buyurtmani bekor qilish sababini tanlang",
+  "photos": "Fotosuratlar",
   "--InputMessage": "",
   "phoneMessage": "Telefon raqamingizni kiriting",
   "codeMessage": "Tasdiqlash uchun SMS-xabar orqali yuborildi:",

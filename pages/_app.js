@@ -1,5 +1,5 @@
 import { Provider } from "react-redux";
-import '../public/styles/nprogress.css'
+import "../public/styles/nprogress.css";
 import "../styles/globals.css";
 import store from "../redux/store/store";
 import { Layout } from "../components";
@@ -15,8 +15,8 @@ import { useEffect } from "react";
 import { SkeletonTheme } from "react-loading-skeleton";
 import NProgress from "nprogress";
 import { initCollapse } from "../utils/collapse";
-import 'react-loading-skeleton/dist/skeleton.css'
-
+import "react-loading-skeleton/dist/skeleton.css";
+import { FilesProvider } from "../context/useFiles";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
@@ -79,8 +79,6 @@ export default function App({ Component, pageProps }) {
     setLocale(router.locale);
   }, [router.locale]);
 
-
-
   return (
     <Provider store={store}>
       <IntlProvider
@@ -88,14 +86,17 @@ export default function App({ Component, pageProps }) {
         defaultLocale={router.defaultLocale}
         messages={{ ...texts, ...messages[router.locale] }}
         // remove
-        onError={() => null}>
+        onError={() => null}
+      >
         <LangProvider>
-          <SkeletonTheme>
-            <Toaster position="top-right" reverseOrder={false} />
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </SkeletonTheme>
+          <FilesProvider>
+            <SkeletonTheme>
+              <Toaster position="top-right" reverseOrder={false} />
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </SkeletonTheme>
+          </FilesProvider>
         </LangProvider>
       </IntlProvider>
     </Provider>

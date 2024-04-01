@@ -2,7 +2,12 @@ import { useIntl } from "react-intl";
 import axios, { authAxios } from "../../../utils/axios";
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import { DisabledInput, ReturnBack, Title } from "../../../components";
+import {
+  DisabledInput,
+  ImagesCards,
+  ReturnBack,
+  Title,
+} from "../../../components";
 import { useDispatch } from "react-redux";
 import { convertUnixToDateWithHours } from "../../../utils/date";
 import Button from "../../../components/Forms/button";
@@ -39,10 +44,12 @@ function page({ info, params }) {
           )}
           <DisabledInput
             title={intl.formatMessage({ id: "bemor" })}
-            value={
-              `${info?.relative?.type_name} (${info?.relative?.fullname})` ||
-              intl.formatMessage({ id: "me" })
-            }
+            value={`
+             ${
+               info?.relative?.type_name
+                 ? info?.relative?.type_name + " " + info?.relative?.fullname
+                 : intl.formatMessage({ id: "me" })
+             }`}
           />
           <DisabledInput
             title={intl.formatMessage({ id: "orderStatus" })}
@@ -75,6 +82,12 @@ function page({ info, params }) {
               info?.flat
             }-${intl.formatMessage({ id: "flat" })}`}
           />
+          {info?.orderPatientPictures &&
+          info?.orderPatientPictures?.length > 0 ? (
+            <ImagesCards images={info?.orderPatientPictures} />
+          ) : (
+            <></>
+          )}
           <DisabledInput
             title={intl.formatMessage({ id: "services" })}
             items={info?.orderItems}

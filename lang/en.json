@@ -49,6 +49,7 @@
   "address": "Address",
   "services": "Services",
   "orderCancel": "Select the reason for canceling the order",
+  "photos": "Photos",
   "--Body": "",
   "unsubscribeBody": "Register to see",
   "newsBody": "No news available.",
