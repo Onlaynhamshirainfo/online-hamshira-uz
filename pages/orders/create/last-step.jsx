@@ -112,7 +112,7 @@ export default function LastStep() {
         description={""}
         key={"onlayn hamshira , onlayn , hamshira"}
       />
-      {console.log(files)}
+      {/* {console.log(files)} */}
       <main className="container">
         <div className="flex flex-col gap-7 py-5">
           <div className="flex flex-col items-start justify-start gap-3">
@@ -123,13 +123,13 @@ export default function LastStep() {
                 : intl.formatMessage({ id: "go_clinic" })}
             </h1>
           </div>
-          <File
+          {/* <File
             id={"images"}
             isMultiple
             name={"images"}
             title={intl.formatMessage({ id: "moreImages" })}
             getImages={handleGetImages}
-          />
+          /> */}
           <InfoPerson />
           <InfoIllness />
           <Button onClick={orderFn}>
