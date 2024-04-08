@@ -112,7 +112,6 @@ export default function ConnectsAdd() {
         description={""}
         key={"onlayn hamshira , onlayn , hamshira"}
       />
-      {console.log(formError)}
       <div className="container">
         <form
           onSubmit={handleSubmit(submitFn)}

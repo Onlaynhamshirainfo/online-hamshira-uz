@@ -61,7 +61,7 @@ const modalsSlice = createSlice({
       state.contactUs = !state.contactUs;
     },
     toggleOrderTypeModal: (state, actions) => {
-      state.orderType = !state.orderType;
+      // state.orderType = !state.orderType;
       state.currentOrder = actions.payload;
       state.active = null;
     },

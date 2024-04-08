@@ -48,7 +48,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="fixed bottom-0 left-0 w-full sm:px-5 bg-white z-[99]">
+    <footer className="fixed bottom-0 left-0 w-full sm:px-5 bg-white z-[99] shadow-[#ebebeb] shadow-2xl">
       <div className="container flex flex-row items-center justify-between">
         {tabs?.map((item, index) => {
           let isTrue = router?.asPath == item?.link;
@@ -59,15 +59,18 @@ export default function Footer() {
               key={index}
               className={`footer__tabs flex flex-col justify-center items-center gap-2 px-2 py-4 xs:p-5 relative z-0 ${
                 isTrue ? "footer__active" : ""
-              }`}>
+              }`}
+            >
               <span
                 dangerouslySetInnerHTML={{
                   __html: item?.icon,
-                }}></span>
+                }}
+              ></span>
               <span
                 className={`${
                   isTrue ? "text-text-primary" : "text-gray"
-                }  leading-normal font-medium text-xs xs:text-base capitalize`}>
+                }  leading-normal font-medium text-xs xs:text-base capitalize`}
+              >
                 {item?.name}
               </span>
             </a>

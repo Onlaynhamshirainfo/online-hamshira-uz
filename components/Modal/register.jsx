@@ -27,7 +27,7 @@ export default function RegisterModal() {
 
   const resetForm = () => {
     inputRef.current.value = "";
-    setErrors(null); 
+    setErrors(null);
   };
 
   const submitFn = async (event) => {
@@ -62,7 +62,8 @@ export default function RegisterModal() {
       active={registerModal}
       func={() => dispatch(toggleRegisterModal())}
       title={intl.formatMessage({ id: "Enter" })}
-      body={intl.formatMessage({ id: "phoneMessage" })}>
+      body={intl.formatMessage({ id: "phoneMessage" })}
+    >
       <form className="flex flex-col gap-4 w-[95%]" onSubmit={submitFn}>
         <div className="relative z-0">
           <input
@@ -87,8 +88,19 @@ export default function RegisterModal() {
           <Checkbox />
           <div className="w-[1px] bg-text-primary"></div>
           <p className="flex-1 text-sm">
-            <span className="text-green font-medium">Ommaviy oferta</span> va{" "}
-            <span className="text-green font-medium">maxfiylik siyosati</span>{" "}
+            <a
+              href={`/${router.locale}/license`}
+              className="text-green font-medium"
+            >
+              Ommaviy oferta
+            </a>{" "}
+            va{" "}
+            <a
+              href={`/${router.locale}/license`}
+              className="text-green font-medium"
+            >
+              maxfiylik siyosati
+            </a>{" "}
             shartlari bilan tanishdim hamda roziligimni bildiraman.
           </p>
         </div>

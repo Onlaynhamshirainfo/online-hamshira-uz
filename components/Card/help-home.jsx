@@ -3,11 +3,16 @@ import {
   toggleRegisterModal,
 } from "../../redux/slice/modals";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React from "react";
+import toast from "react-hot-toast";
+import { useIntl } from "react-intl";
 import { useDispatch } from "react-redux";
 
 export default function HelpCardHome({ data }) {
   const dispatch = useDispatch();
+  const router = useRouter();
+  const intl = useIntl();
 
   const helpedModalFn = () => {
     const quest =
@@ -15,7 +20,12 @@ export default function HelpCardHome({ data }) {
     if (!quest) {
       dispatch(toggleRegisterModal());
     } else {
-      dispatch(toggleOrderTypeModal(data));
+      if (data?.call_home == 1 || data?.go_clinic == 1) {
+        dispatch(toggleOrderTypeModal(data));
+        router.push(`/${router.locale}/orders/create/first-step`);
+      }else{
+        toast.error(intl.formatMessage({id: "assoon"}))
+      }
     }
   };
 
