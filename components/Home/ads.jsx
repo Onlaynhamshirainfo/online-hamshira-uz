@@ -32,16 +32,18 @@ export default function Ads() {
 
   return (
     <section className="container flex flex-row items-center justify-start gap-3 overflow-x-scroll scroll__none">
+      {console.log(ads)}
       {ads?.data?.map((item, index) => {
         return (
           <a
-            href={item?.link}
+            href={`${process.env.NEXT_PUBLIC_IMAGE_BASE}${item.icon}`}
+            target="_blank"
             key={index}
             className="overflow-hidden rounded-xl">
             <img
-              src={item?.image}
-              alt="story"
-              title="Story"
+              src={`${process.env.NEXT_PUBLIC_IMAGE_BASE}${item.icon}`}
+              alt={item.name}
+              title={item.name}
               width={"100px"}
               height={"90px"}
             />

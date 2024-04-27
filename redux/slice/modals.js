@@ -63,6 +63,7 @@ const modalsSlice = createSlice({
     toggleOrderTypeModal: (state, actions) => {
       // state.orderType = !state.orderType;
       state.currentOrder = actions.payload;
+      localStorage.setItem("currentOrder", JSON.stringify(actions.payload));
       state.active = null;
     },
     changeOrderTypes: (state, actions) => {
@@ -99,7 +100,7 @@ export const {
   toggleOrderTypeModal,
   changeOrderTypes,
   getActiveOrderFromLocal,
-  toggleOrderCancelModal
+  toggleOrderCancelModal,
 } = modalsSlice.actions;
 
 export default modalsSlice.reducer;

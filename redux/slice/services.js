@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const servicesSlice = createSlice({
   name: "services",
   initialState: {
-    defaultSum: 20000,
+    defaultSum: 0,
     totalSum: 0,
     currentPrice: [],
   },
