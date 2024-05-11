@@ -199,6 +199,12 @@ img {
   opacity: 1;
   transition: background 0.3s linear;
 }
+.slider__modal.ads .swiper-horizontal > .swiper-pagination-bullets,
+.slider__modal.ads .swiper-pagination-bullets.swiper-pagination-horizontal,
+.slider__modal.ads .swiper-pagination-custom,
+.slider__modal.ads .swiper-pagination-fraction {
+  bottom: 20px;
+}
 
 .maps .ymaps-2-1-79-map {
   position: absolute !important;

@@ -115,5 +115,8 @@
   "hour": "Hour",
   "rule": "I have read and agree to <a href='/license'>Public Offer</a> and <a href='/license'>Privacy Policy</a>.",
   "reasonCheck": "Please , Check a reason",
-  "imageError": "Please , Upload another image."
+  "imageError": "Please , Upload another image.",
+  "titleCancelOrder": "Do you want to cancel the creation of an order?",
+  "bodyCancelOrder": "This action cannot be undone.",
+  "yes": "Yes"
 }

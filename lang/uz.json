@@ -115,5 +115,8 @@
   "hour": "Soat",
   "rule": "<a href='/license'>Ommaviy oferta</a> va <a href='/license'>maxfiylik siyosati</a> shartlari bilan tanishdim hamda roziligimni bildiraman.",
   "reasonCheck": "Iltimos , Sababni tanlang.",
-  "imageError": "Iltimos, boshqa rasm yuklang."
+  "imageError": "Iltimos, boshqa rasm yuklang.",
+  "titleCancelOrder": "Buyurtma yaratishni bekor qilishni xohlaysizmi ? ",
+  "bodyCancelOrder": "Bu amalni orqaga qaytarib bo'lmaydi.",
+  "yes": "Ha"
 }

@@ -16,6 +16,9 @@ const modalsSlice = createSlice({
     active: null,
     orderCancel: false,
     currentOrderId: null,
+    adsModal: false,
+    adsModalId: 0,
+    cancelOrderingModal: false,
   },
   reducers: {
     toggleRegisterModal: (state) => {
@@ -83,6 +86,13 @@ const modalsSlice = createSlice({
       state.orderCancel = !state.orderCancel;
       state.currentOrderId = actions?.payload;
     },
+    toggleAdsModal: (state, actions) => {
+      state.adsModal = !state.adsModal;
+      state.adsModalId = actions.payload;
+    },
+    toggleCancelOrderingModal: (state, actions) => {
+      state.cancelOrderingModal = !state.cancelOrderingModal;
+    },
   },
 });
 
@@ -101,6 +111,8 @@ export const {
   changeOrderTypes,
   getActiveOrderFromLocal,
   toggleOrderCancelModal,
+  toggleAdsModal,
+  toggleCancelOrderingModal
 } = modalsSlice.actions;
 
 export default modalsSlice.reducer;

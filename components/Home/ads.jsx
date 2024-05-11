@@ -4,9 +4,12 @@ import React from "react";
 import useSWR from "swr";
 import Skeleton from "react-loading-skeleton";
 import { useIntl } from "react-intl";
+import { useDispatch } from "react-redux";
+import { toggleAdsModal } from "../../redux/slice/modals";
 
 export default function Ads() {
   const router = useRouter();
+  const dispatch = useDispatch();
   const intl = useIntl();
   const { data: ads } = useSWR(["story/index", router.locale], (url) =>
     fetcher(url, {
@@ -18,6 +21,11 @@ export default function Ads() {
 
   if (ads?.data?.length == 0) {
     return null;
+  }
+
+
+  const changeAdsModal = (id) => {
+    dispatch(toggleAdsModal(id));
   }
 
   if (!ads?.data) {
@@ -35,8 +43,9 @@ export default function Ads() {
       {console.log(ads)}
       {ads?.data?.map((item, index) => {
         return (
-          <a
-            href={`${process.env.NEXT_PUBLIC_IMAGE_BASE}${item.icon}`}
+          <button
+            type="button"
+            onClick={() => changeAdsModal(item.id)}
             target="_blank"
             key={index}
             className="overflow-hidden rounded-xl">
@@ -47,7 +56,7 @@ export default function Ads() {
               width={"100px"}
               height={"90px"}
             />
-          </a>
+          </button>
         );
       })}
       {/* <div

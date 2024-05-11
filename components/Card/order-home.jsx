@@ -11,19 +11,27 @@ export default function OrderCardHome({ data, white }) {
       } p-5 w-full min-h-[110px]`}
     >
       <div className="flex flex-row items-center gap-3 sm:gap-5">
-        <div className="w-12 sm:w-16 h-12 sm:h-16 rounded-full overflow-hidden full__image">
-          <Image
-            src={`${
-              data?.nurse
-                ? `${process.env.NEXT_PUBLIC_IMAGE_BASE}${data?.nurse?.photo}`
-                : "/images/going-nurse.svg"
-            }`}
-            alt=""
-            width={0}
-            height={0}
-            layout="responsive"
-          />
-        </div>
+        {data?.nurse ? (
+          <div className="w-12 sm:w-16 h-12 sm:h-16 rounded-full overflow-hidden full__image">
+            <Image
+              src={`${process.env.NEXT_PUBLIC_IMAGE_BASE}${data?.nurse?.photo}`}
+              alt=""
+              width={0}
+              height={0}
+              layout="responsive"
+            />
+          </div>
+        ) : (
+          <div className="w-12 sm:w-16 h-12 sm:h-16 overflow-hidden bg-grey-6 rounded-full">
+            <Image
+              src={"/images/nurse.svg"}
+              layout="responsive"
+              width={0}
+              height={0}
+            />
+          </div>
+        )}
+
         <div className="flex flex-col sm:gap-1">
           <h2 className="leading-normal font-medium text-sm sm:text-base flex-1">
             {data?.nurse

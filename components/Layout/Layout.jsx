@@ -21,10 +21,12 @@ import {
   changeLangStartModal,
   changeSliderModal,
 } from "../../redux/slice/modals";
+import AdsModal from "../Modal/start/ads-modal";
+import CancelOrdering from "../Modal/cancel-ordering";
 
 const Layout = ({ children }) => {
   const dispatch = useDispatch();
-  const { sliderModal, infoModal, orderCancel } = useSelector(
+  const { sliderModal, infoModal, orderCancel , adsModal } = useSelector(
     (state) => state.modals
   );
   const [active, setActive] = useState(true);
@@ -115,7 +117,9 @@ const Layout = ({ children }) => {
       {sliderModal ? <SliderModal /> : ""}
       {infoModal ? <InfoModal /> : ""}
       {orderCancel ? <OrderCancel /> : ""}
+      {adsModal ? <AdsModal /> : ""}
       <QuitModal />
+      <CancelOrdering />
       <LangModal />
       <ContactUs />
       <OrderType />

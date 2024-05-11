@@ -12,6 +12,7 @@ import {
 } from "../../../components";
 import { useEffect } from "react";
 import { getActiveOrderFromLocal } from "../../../redux/slice/modals";
+import CancelOrder from "../../../components/Helper/cancel-order";
 
 export default function FourthStep() {
   const router = useRouter();
@@ -32,12 +33,13 @@ export default function FourthStep() {
       />
       <main className="container">
         <div className="flex flex-col gap-7 py-5">
-          <div className="flex flex-col items-start justify-start gap-3">
+          {/* <div className="flex flex-col items-start justify-start gap-3">
             <ReturnBack isPadding url="orders/create/third-step/" isRouter/>
             <h1 className="text-text-primary leading-normal font-semibold text-xl">
               {intl.formatMessage({ id: "call_home" })}
             </h1>
-          </div>
+          </div> */}
+          <CancelOrder url="orders/create/third-step/" isRouter/>
           <Loader per={"95%"} />
           <IllnessLists />
         </div>
