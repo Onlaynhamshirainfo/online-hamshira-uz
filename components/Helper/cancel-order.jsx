@@ -4,7 +4,7 @@ import { useIntl } from "react-intl";
 import { useDispatch } from "react-redux";
 import { toggleCancelOrderingModal } from "../../redux/slice/modals";
 
-export default function CancelOrder(url, isRouter) {
+export default function CancelOrder({url, isRouter}) {
   const intl = useIntl();
   const dispatch = useDispatch();
 
