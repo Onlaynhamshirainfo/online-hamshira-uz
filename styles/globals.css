@@ -102,6 +102,11 @@ img {
   width: 0;
 }
 
+.rule a{
+  color: #1cc34b;
+  font-weight: 600;
+}
+
 /* Input box styling */
 .input__box {
   position: relative;

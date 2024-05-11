@@ -35,9 +35,7 @@ export default function FourthStep() {
           <div className="flex flex-col items-start justify-start gap-3">
             <ReturnBack isPadding url="orders/create/third-step/" isRouter/>
             <h1 className="text-text-primary leading-normal font-semibold text-xl">
-              {active == "call_home"
-                ? intl.formatMessage({ id: "call_home" })
-                : intl.formatMessage({ id: "go_clinic" })}
+              {intl.formatMessage({ id: "call_home" })}
             </h1>
           </div>
           <Loader per={"95%"} />

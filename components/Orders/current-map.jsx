@@ -47,12 +47,12 @@ export default function CurrentMap() {
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="flex flex-col lg:flex-row justify-start text-text-primary">
+      {/* <div className="flex flex-col lg:flex-row justify-start text-text-primary">
         <h2 className="font-semibold text-base ">
           {intl.formatMessage({ id: "chooseMap" })}
         </h2>
         <p className="font-normal">{locationDetails}</p>
-      </div>
+      </div> */}
       <MapWithPlacemark onLocationSelect={handleLocationSelect} />
       <Button type="button" onClick={() => submitFn()} disabled={reqLoading}>
         {intl.formatMessage({ id: "continue" })}

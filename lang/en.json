@@ -27,7 +27,7 @@
   "go_clinic": "Go Clinic",
   "me": "Me",
   "bemor": "Patient",
-  "nurse":"Nurse",
+  "nurse": "Nurse",
   "reasonChoose": "Choose a reason",
   "reason": "How can we help you?",
   "moreImages": "Upload a doctor's referral",
@@ -92,7 +92,7 @@
   "floor": "Floor",
   "entrance": "Entrance",
   "info_for_nurse": "Additional information for the specialist",
-  "infoPlaceholder": "For example, the name of a nearby object",
+  "infoPlaceholder": "Please include any characteristics that are important to you (eg gender, experience, needs). This will help you find the right specialist for you",
   "fullname": "F.I.O",
   "relative": "My ",
   "weight": "Weight",
@@ -112,5 +112,8 @@
   "currentDate": "At the right time",
   "nowDate": "For now",
   "date": "Day",
-  "hour": "Hour"
+  "hour": "Hour",
+  "rule": "I have read and agree to <a href='/license'>Public Offer</a> and <a href='/license'>Privacy Policy</a>.",
+  "reasonCheck": "Please , Check a reason",
+  "imageError": "Please , Upload another image."
 }

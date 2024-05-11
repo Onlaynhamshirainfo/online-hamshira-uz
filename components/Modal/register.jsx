@@ -87,7 +87,7 @@ export default function RegisterModal() {
         <div className="flex flex-row justify-between gap-2 pl-2">
           <Checkbox />
           <div className="w-[1px] bg-text-primary"></div>
-          <p className="flex-1 text-sm">
+          {/* <p className="flex-1 text-sm">
             <a
               href={`/${router.locale}/license`}
               className="text-green font-medium"
@@ -102,7 +102,14 @@ export default function RegisterModal() {
               maxfiylik siyosati
             </a>{" "}
             shartlari bilan tanishdim hamda roziligimni bildiraman.
-          </p>
+          </p> */}
+          <p
+            className="flex-1 text-sm rule"
+            dangerouslySetInnerHTML={{
+              __html:
+                intl.formatMessage({id: "rule"}),
+            }}
+          />
         </div>
         <Button type="submit">
           {reqLoading

@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { useIntl } from "react-intl";
 import Counter from "./counter";
 import CounterCheckbox from "./counter-checkbox";
+import toast from "react-hot-toast";
 
 export default function Dropdown({
   data,

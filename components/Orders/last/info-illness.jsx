@@ -25,33 +25,33 @@ export default function InfoIllness() {
   return (
     <div className="w-full bg-white rounded-2xl sm:rounded-3xl flex flex-col gap-8 overflow-hidden p-7">
       <div className="flex flex-row items-center justify-between">
-        <h4 className="font-semibold text-base text-text-primary">
+        <h4 className="font-semibold text-sm sm:text-base text-text-primary">
           {intl.formatMessage({ id: "homeServices" })}
         </h4>
-        <p className="font-medium text-base text-text-primary">
+        <p className="font-medium text-sm sm:text-base text-text-primary">
           {defaultSum} {intl.formatMessage({ id: "sum" })}
         </p>
       </div>
       {orderInfo?.items?.map((item, index) => {
         return (
           <div
-            className="flex flex-row items-center justify-between"
+            className="flex flex-col xs:flex-row xs:items-center justify-between xs:gap-0 gap-2 xs:border-transparent border-b border-grey-5 pb-3 xs:pb-0"
             key={index}
           >
-            <h5 className="font-medium text-base text-text-primary">
-              {item?.name} <span className="text-green">+{item?.count}</span>
+            <h5 className="font-medium text-sm sm:text-base text-text-primary">
+              {item?.name} <span className="text-green">+{item?.count}</span>:
             </h5>
-            <p className="font-normal text-base text-text-primary">
+            <p className="font-normal text-sm sm:text-base text-text-primary">
               {item?.price} {intl.formatMessage({ id: "sum" })}
             </p>
           </div>
         );
       })}
       <div className="flex flex-row items-center justify-between">
-        <h4 className="font-semibold text-base text-text-primary">
+        <h4 className="font-semibold text-sm sm:text-base text-text-primary">
           {intl.formatMessage({ id: "total" })}
         </h4>
-        <p className="font-semibold text-base text-green">
+        <p className="font-semibold text-sm sm:text-base text-green">
           {totalSum || defaultSum} {intl.formatMessage({ id: "sum" })}
         </p>
       </div>

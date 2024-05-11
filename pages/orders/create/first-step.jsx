@@ -28,9 +28,9 @@ export default function FirstStep() {
           <div className="flex flex-col items-start justify-start gap-3">
             <ReturnBack isPadding />
             <h1 className="text-text-primary leading-normal font-semibold text-xl">
-              {active == "call_home"
-                ? intl.formatMessage({ id: "call_home" })
-                : intl.formatMessage({ id: "go_clinic" })}
+              {intl.formatMessage({ id: "call_home" })}
+              {/* {active == "call_home"
+                : intl.formatMessage({ id: "go_clinic" })} */}
             </h1>
           </div>
           <Loader per={"25%"}/>

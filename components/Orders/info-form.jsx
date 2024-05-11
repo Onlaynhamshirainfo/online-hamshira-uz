@@ -10,6 +10,7 @@ import Selection from "./components/selection";
 import Button from "../Forms/button";
 import { changeOrderImages } from "../../redux/slice/settings";
 import { useFiles } from "../../context/useFiles";
+import toast from "react-hot-toast";
 
 export default function InfoForm() {
   const intl = useIntl();
@@ -63,15 +64,20 @@ export default function InfoForm() {
   );
 
   const submitFn = async (data) => {
-    localStorage.setItem("orderReasons", JSON.stringify(data?.reason || {}));
-    localStorage.setItem("orderRelatives", JSON.stringify(data?.relative_id));
-    localStorage.setItem(
-      "orderRelativePerson",
-      JSON.stringify(
-        relatives?.data?.find((item) => item.id == data?.relative_id)
-      )
-    );
-    router.push(`/${router.locale}/orders/create/second-step`);
+
+    if(!data?.reason){
+      toast.error(intl.formatMessage({id: "reasonCheck"}))
+    }else{
+      localStorage.setItem("orderReasons", JSON.stringify(data?.reason || {}));
+      localStorage.setItem("orderRelatives", JSON.stringify(data?.relative_id));
+      localStorage.setItem(
+        "orderRelativePerson",
+        JSON.stringify(
+          relatives?.data?.find((item) => item.id == data?.relative_id)
+        )
+      );
+      router.push(`/${router.locale}/orders/create/second-step`);
+    }
   };
 
   const handleGetImages = (images) => {
@@ -124,12 +130,14 @@ export default function InfoForm() {
         register={register}
         errors={formError}
         currentDrop={info}
+        isActive={true}
         title={intl.formatMessage({ id: "reason" })}
       />
       <File
         id={"images"}
         isMultiple
         name={"images"}
+        type="svg"
         title={intl.formatMessage({ id: "moreImages" })}
         getImages={handleGetImages}
       />

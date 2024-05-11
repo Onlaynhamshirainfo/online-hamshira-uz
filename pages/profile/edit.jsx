@@ -33,7 +33,7 @@ export default function Edit() {
       first_name: info?.first_name || "",
       last_name: info?.last_name || "",
       father_name: info?.father_name || "",
-      weight: info?.contact?.weight || "",
+      // weight: info?.contact?.weight || "",
       gender: info?.contact?.gender || "",
       branch_id: info?.contact?.branch?.id || "",
       photo: info?.photo || "",
@@ -56,7 +56,7 @@ export default function Edit() {
       formData.append("first_name", data?.first_name);
       formData.append("last_name", data?.last_name);
       formData.append("born", Number(date));
-      formData.append("weight", data?.weight);
+      // formData.append("weight", data?.weight);
       formData.append("gender", data?.gender);
       formData.append("photo", image || data?.photo);
       formData.append(
@@ -149,14 +149,14 @@ export default function Edit() {
             register={register}
             errors={formError}
           />
-          <Input
+          {/* <Input
             type="text"
             placeholder={intl.formatMessage({ id: "weight" })}
             name={"weight"}
             id="weight"
             register={register}
             errors={formError}
-          />
+          /> */}
           {/* <Dropdown
             data={branches?.data}
             register={register}

@@ -10,12 +10,24 @@ export default function File({
   title,
   getImages,
   errors,
+  type,
 }) {
   const intl = useIntl();
   const [images, setImages] = useState([]);
 
   const handleFileChange = (event) => {
     const selectedFiles = Array.from(event.target.files);
+
+    const hasSVGFile = selectedFiles.some(
+      (file) =>
+        file.type.startsWith("image/svg") || file.type.startsWith("image/webp")
+    );
+
+    if (hasSVGFile) {
+      toast.error(intl.formatMessage({id: "imageError"}));
+      return;
+    }
+
     if (!isMultiple) {
       if (selectedFiles.length > 1) {
         toast.error("Only one file can be uploaded.");
