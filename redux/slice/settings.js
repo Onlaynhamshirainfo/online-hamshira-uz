@@ -19,9 +19,9 @@ const settingsSlice = createSlice({
       let local2 =
         typeof window !== "undefined"
           ? localStorage.getItem("news__archive")
-          : null;
+          : [];
       state.info = JSON.parse(local);
-      state.news = JSON.parse(local2);
+      state.news = local2 ? JSON.parse(local2) : [];
     },
     changeAllNews: (state, action) => {
       const existingIndex = state.news.findIndex(
@@ -97,7 +97,7 @@ export const {
   changeAllNews,
   changeItemsFromOrder,
   removeItemsFromLocal,
-  changeOrderImages
+  changeOrderImages,
 } = settingsSlice.actions;
 
 export default settingsSlice.reducer;

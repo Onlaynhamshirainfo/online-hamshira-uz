@@ -82,7 +82,7 @@ export default function IllnessLists() {
               key={index}
               typeDropdown={"illness"}
               name={"items"}
-              isActive={index == 0}
+              isActive={true}
             />
           );
         })
