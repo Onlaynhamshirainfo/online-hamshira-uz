@@ -11,6 +11,7 @@ export default function Wrapper({
   title,
   body,
   height,
+  titleAds
 }) {
   const intl = useIntl();
   if (type == "lang") {
@@ -19,12 +20,14 @@ export default function Wrapper({
         active={active}
         func={() => {
           console.log("Lang");
-        }}>
+        }}
+      >
         <div
           className={`bg-white w-11/12 sm:w-[480px] px-5 py-9 xs:p-10 ${
             active ? "scale-1" : "scale-0"
           } transition-transform duration-200 rounded-2xl flex flex-col gap-8 sm:gap-10 items-center justify-center relative z-0`}
-          onClick={(e) => e.stopPropagation()}>
+          onClick={(e) => e.stopPropagation()}
+        >
           <div className="flex flex-col text-center gap-1 w-full sm:w-[90%] text-text-primary">
             <h3 className="leading-normal font-semibold text-xl sm:text-2xl">
               {intl.formatMessage({ id: "langStart" })}
@@ -44,14 +47,18 @@ export default function Wrapper({
       <ModalWrapper active={active} func={() => func()} isPadding="sm:py-5">
         <div
           className={`w-full sm:w-[480px] h-full relative z-0 sm:rounded-3xl overflow-hidden`}
-          onClick={(e) => e.stopPropagation()}>
+          onClick={(e) => e.stopPropagation()}
+        >
           {children}
 
           <button
             type="button"
             className="absolute z-20 top-5 right-5 bg-[#0000003c] p-3 rounded-full text-white text-[14px] leading-normal font-semibold backdrop-blur-sm"
-            onClick={() => func()}>
-            {intl.formatMessage({ id: "skip" })}
+            onClick={() => func()}
+          >
+            {titleAds == "ads"
+              ? intl.formatMessage({ id: "skipAds" })
+              : intl.formatMessage({ id: "skip" })}
           </button>
         </div>
       </ModalWrapper>
@@ -65,12 +72,11 @@ export default function Wrapper({
           className={`bg-white w-full sm:w-[420px] px-5 py-9 xs:p-10 ${
             active ? "translate-y-0" : "translate-y-full"
           } transition-transform duration-200 rounded-t-3xl flex flex-col gap-3 items-center justify-center relative z-0`}
-          onClick={(e) => e.stopPropagation()}>
+          onClick={(e) => e.stopPropagation()}
+        >
           <div className="w-10 h-2 bg-grey-5 absolute top-4 rounded-xl"></div>
           <div className="flex flex-col items-center gap-5 text-text-primary w-full">
-            <h1 className="leading-normal font-semibold text-lg">
-              {title}
-            </h1>
+            <h1 className="leading-normal font-semibold text-lg">{title}</h1>
             {children}
           </div>
         </div>
@@ -84,7 +90,8 @@ export default function Wrapper({
         className={`bg-white w-11/12 sm:w-[480px] px-5 py-9 xs:p-10 ${
           active ? "scale-1" : "scale-0"
         } transition-transform duration-200 rounded-2xl flex flex-col gap-3 items-center justify-center relative z-0`}
-        onClick={(e) => e.stopPropagation()}>
+        onClick={(e) => e.stopPropagation()}
+      >
         {isLogo ? (
           <></>
         ) : (
@@ -122,7 +129,8 @@ export default function Wrapper({
           <div
             className={`flex flex-col text-center gap-1 ${
               isLogo ? "pt-4" : ""
-            }`}>
+            }`}
+          >
             <h3 className="leading-normal font-semibold text-xl sm:text-2xl">
               {title}
             </h3>
@@ -158,7 +166,8 @@ function ModalWrapper({
       } flex justify-center transition-opacity duration-200 ${
         isPadding ? isPadding : "py-5"
       } overflow-y-scroll scroll__none`}
-      onClick={() => (func ? func() : null)}>
+      onClick={() => (func ? func() : null)}
+    >
       {children}
     </div>
   );

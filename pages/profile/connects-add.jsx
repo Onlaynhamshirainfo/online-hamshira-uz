@@ -58,15 +58,15 @@ export default function ConnectsAdd() {
       const formData = new FormData();
       formData.append("fullname", data?.fullname);
       formData.append("birthday", Number(date));
-      formData.append("weight", data?.weight);
       formData.append("gender", data?.gender);
-      formData.append("about", data?.about);
+      formData.append("weight", " ");
+      formData.append("about", " ");
       formData.append("type", data?.type);
       formData.append("picture_file", image);
 
       setReqLoading(true);
       setFormError(null);
-      console.error(image)
+      console.error(image);
 
       const response = await axios.post(`relative/create`, formData, {
         headers: {
@@ -89,7 +89,7 @@ export default function ConnectsAdd() {
 
       reset();
     } catch (e) {
-      setFormError(e?.response?.data?.errors)
+      setFormError(e?.response?.data?.errors);
     } finally {
       setReqLoading(false);
     }
@@ -142,7 +142,7 @@ export default function ConnectsAdd() {
             register={register}
             errors={formError}
           />
-          <Input
+          {/* <Input
             type="text"
             placeholder={intl.formatMessage({ id: "weight" })}
             name={"weight"}
@@ -157,7 +157,7 @@ export default function ConnectsAdd() {
             id="about"
             register={register}
             errors={formError}
-          />
+          /> */}
           <File
             id={"picture_file"}
             name={"picture_file"}

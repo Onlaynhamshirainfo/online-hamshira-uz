@@ -102,9 +102,10 @@ img {
   width: 0;
 }
 
-.rule a{
+.rule span {
   color: #1cc34b;
   font-weight: 600;
+  cursor: pointer;
 }
 
 /* Input box styling */
@@ -121,7 +122,7 @@ img {
   color: #1cc34b;
 }
 
-.input__box input:focus{
+.input__box input:focus {
   outline-color: #1cc34b;
 }
 

@@ -105,9 +105,12 @@ export default function RegisterModal() {
           </p> */}
           <p
             className="flex-1 text-sm rule"
+            onClick={() => {
+              router.push(`/${router.locale}/license`);
+              dispatch(toggleRegisterModal())
+            }}
             dangerouslySetInnerHTML={{
-              __html:
-                intl.formatMessage({id: "rule"}),
+              __html: intl.formatMessage({ id: "rule" }),
             }}
           />
         </div>

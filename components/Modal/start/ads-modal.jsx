@@ -62,6 +62,7 @@ export default function AdsModal() {
       active={adsModal}
       func={() => dispatch(toggleAdsModal())}
       type={"slider"}
+      titleAds={"ads"}
     >
       <Swiper
         pagination={{ clickable: true }}

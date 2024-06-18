@@ -40,7 +40,6 @@ export default function Ads() {
 
   return (
     <section className="container flex flex-row items-center justify-start gap-3 overflow-x-scroll scroll__none">
-      {console.log(ads)}
       {ads?.data?.map((item, index) => {
         return (
           <button

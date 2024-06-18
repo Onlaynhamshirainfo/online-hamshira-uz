@@ -30,6 +30,7 @@ function page({ info, params }) {
 
   return (
     <section className="container">
+      {console.log(info)}
       <ReturnBack url={""} />
       <main className="flex flex-col items-start leading-normal gap-3 sm:gap-5">
         <Title>{intl.formatMessage({ id: "orderInfo" })}</Title>
@@ -37,7 +38,11 @@ function page({ info, params }) {
           {info?.nurse?.id ? (
             <DisabledInput
               title={intl.formatMessage({ id: "nurse" })}
-              value={`${info?.nurse?.first_name} ${info?.nurse?.last_name} ${info?.nurse?.phone}`}
+              value={`${info?.nurse?.first_name} ${info?.nurse?.last_name} ${
+                info?.status?.int == 11 || info?.status?.int == 12
+                  ? info?.nurse?.phone
+                  : " "
+              }`}
             />
           ) : (
             <></>
@@ -47,7 +52,7 @@ function page({ info, params }) {
             value={`
              ${
                info?.relative?.type_name
-                 ? info?.relative?.type_name + " " + info?.relative?.fullname
+                 ? info?.relative?.fullname + " " + info?.relative?.type_name
                  : intl.formatMessage({ id: "me" })
              }`}
           />
