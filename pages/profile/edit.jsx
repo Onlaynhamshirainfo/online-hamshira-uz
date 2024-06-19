@@ -35,7 +35,7 @@ export default function Edit() {
       father_name: info?.father_name || "",
       // weight: info?.contact?.weight || "",
       gender: info?.contact?.gender || "",
-      branch_id: info?.contact?.branch?.id || "",
+      branch_id: "",
       photo: info?.photo || "",
       born: info?.contact?.born || "",
     },
@@ -50,20 +50,20 @@ export default function Edit() {
   );
 
   const submitFn = async (data) => {
-    const date = converUnivDate(data?.born);
+    const date = await converUnivDate(data?.born);
+    console.error(data?.born);
     try {
       const formData = new FormData();
       formData.append("first_name", data?.first_name);
       formData.append("last_name", data?.last_name);
-      formData.append("born", Number(date));
+      // formData.append("born", info?.contact?.born);
       // formData.append("weight", data?.weight);
       formData.append("gender", data?.gender);
       formData.append("photo", image || data?.photo);
       formData.append(
         "branch_id",
-        data?.branch_id || info?.contact?.branch?.id
+        data?.branch_id ? data?.branch_id : info?.contact?.branch?.id
       );
-
       setReqLoading(true);
       setFormError(null);
 
@@ -89,7 +89,7 @@ export default function Edit() {
 
       setTimeout(() => {
         router.push(`/${router.locale}/profile/`);
-        router.reload();
+        // router.reload();
       }, 500);
 
       reset();
@@ -141,14 +141,14 @@ export default function Edit() {
             register={register}
             errors={formError}
           />
-          <Input
+          {/* <Input
             type="date"
             placeholder={intl.formatMessage({ id: "birthday" })}
             name={"born"}
             id="born"
             register={register}
             errors={formError}
-          />
+          /> */}
           {/* <Input
             type="text"
             placeholder={intl.formatMessage({ id: "weight" })}
@@ -171,6 +171,14 @@ export default function Edit() {
             title={intl.formatMessage({ id: "profileImage" })}
             getImages={handleGetImages}
             errors={formError}
+          />
+          <Dropdown
+            data={branches?.data}
+            register={register}
+            name={"branch_id"}
+            title={intl.formatMessage({ id: "city" })}
+            isLogo
+            typeDropdown={"city"}
           />
           <div className="flex flex-col xs:flex-row items-start xs:items-center gap-2 xs:gap-5">
             <h3 className="text-text-secondary xs:px-2 xs:py-1 text-base">

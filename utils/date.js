@@ -15,19 +15,23 @@ export function convertUnixFormat(date, hour) {
   const unixTimestamp = dateTime.getTime() / 1000;
   return unixTimestamp;
 }
-export function converUnivDate(date) {
-  const [day, month, year] = date?.split("-") ?? date?.split("/");
-  const hour = "00:00";
-  const dateTimeString = `${year}-${month.padStart(2, "0")}-${day.padStart(
-    2,
-    "0"
-  )} ${hour}`;
-  const dateTime = new Date(dateTimeString);
-  if (!isNaN(dateTime.getTime())) {
-    const unixTimestamp = dateTime.getTime() / 1000;
-    return unixTimestamp;
+export async function converUnivDate(date) {
+  if (!date) return null;
+
+  // Check if the date is in the format YYYY-MM-DD
+  if (/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    const dateTimeString = `${date}T00:00:00.000Z`;
+
+    const dateTime = new Date(dateTimeString);
+
+    if (!isNaN(dateTime.getTime())) {
+      const unixTimestamp = dateTime.getTime() / 1000;
+      return unixTimestamp;
+    } else {
+      return null;
+    }
   } else {
-    return null;
+    return null; // Invalid format
   }
 }
 
