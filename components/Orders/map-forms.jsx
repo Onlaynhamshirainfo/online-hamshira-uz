@@ -46,7 +46,7 @@ export default function InfoForm() {
       floor,
       entrance,
       info_for_nurse,
-      arrival_time: convertUnixFormat(date, hour),
+      arrival_time: date ? convertUnixFormat(date, hour) : "",
     };
     if (!arrival_type) {
       toast.error(intl.formatMessage({ id: "dateError" }));
