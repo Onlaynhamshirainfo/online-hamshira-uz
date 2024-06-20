@@ -35,7 +35,7 @@ export default function Edit() {
       father_name: info?.father_name || "",
       // weight: info?.contact?.weight || "",
       gender: info?.contact?.gender || "",
-      branch_id: "",
+      branch_id: info?.contact?.branch?.id || "",
       photo: info?.photo || "",
       born: info?.contact?.born || "",
     },
@@ -51,15 +51,17 @@ export default function Edit() {
 
   const submitFn = async (data) => {
     const date = await converUnivDate(data?.born);
-    console.error(data?.born);
     try {
+      console.error(data?.born, date);
       const formData = new FormData();
       formData.append("first_name", data?.first_name);
       formData.append("last_name", data?.last_name);
-      // formData.append("born", info?.contact?.born);
+      formData.append("born", data?.born);
       // formData.append("weight", data?.weight);
       formData.append("gender", data?.gender);
-      formData.append("photo", image || data?.photo);
+      if (image) {
+        formData.append("photo", image);
+      }
       formData.append(
         "branch_id",
         data?.branch_id ? data?.branch_id : info?.contact?.branch?.id
@@ -67,11 +69,15 @@ export default function Edit() {
       setReqLoading(true);
       setFormError(null);
 
-      const response = await axios.post(`client/fill-data`, formData, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("auth__key")}`,
-        },
-      });
+      const response = await axios.post(
+        `client/fill-data?expand=contact.branch`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("auth__key")}`,
+          },
+        }
+      );
 
       const oldDatas = JSON.parse(localStorage.getItem("auth__info"));
       const newDatas = { ...oldDatas, ...response?.data?.data };
@@ -86,16 +92,17 @@ export default function Edit() {
         timer: 3000,
         showConfirmButton: false,
       });
-
+      
       setTimeout(() => {
         router.push(`/${router.locale}/profile/`);
-        // router.reload();
+        router.reload();
       }, 500);
 
       reset();
     } catch (e) {
       setFormError(e?.response?.data?.errors);
-      toast.error(e?.response?.data?.name || e?.message);
+      console.error(e);
+      toast.error(e?.response?.data?.message || e?.message);
     } finally {
       setReqLoading(false);
     }
@@ -113,7 +120,6 @@ export default function Edit() {
 
   return (
     <>
-      {console.log(formError)}
       <Seo
         title={intl.formatMessage({ id: "edit" })}
         description={""}
@@ -141,14 +147,14 @@ export default function Edit() {
             register={register}
             errors={formError}
           />
-          {/* <Input
+          <Input
             type="date"
             placeholder={intl.formatMessage({ id: "birthday" })}
             name={"born"}
             id="born"
             register={register}
             errors={formError}
-          /> */}
+          />
           {/* <Input
             type="text"
             placeholder={intl.formatMessage({ id: "weight" })}

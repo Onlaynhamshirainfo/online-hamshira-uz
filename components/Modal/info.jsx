@@ -56,7 +56,7 @@ export default function InfoModal() {
           last_name: data?.last_name,
           gender: Number(data?.gender),
           branch_id: Number(data?.branch_id),
-          born: Number(date),
+          born: data?.born,
         },
         {
           headers: {
