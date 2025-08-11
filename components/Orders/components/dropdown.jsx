@@ -18,7 +18,7 @@ export default function Dropdown({
   getArrivalTypes,
   required,
   isLogo,
-  isActive,
+  isActive, 
 }) {
   const intl = useIntl();
   const [active, setActive] = useState(isActive || false);
@@ -245,6 +245,7 @@ export default function Dropdown({
                       id={name}
                       name={name}
                       value={item?.id}
+                      defaultChecked={activeInfo?.id == item?.id}
                       {...register(name, validation)}
                     />
                     <span>
@@ -274,6 +275,7 @@ export default function Dropdown({
       </DropdownWrapper>
     );
   }
+
 
   return (
     <DropdownWrapper title={title} isTitle isLogo>

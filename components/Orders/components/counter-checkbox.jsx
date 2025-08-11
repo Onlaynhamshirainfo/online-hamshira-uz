@@ -59,7 +59,7 @@ export default function CounterCheckbox({
   };
 
   return (
-    <div className="flex flex-col xs:flex-row items-start xs:items-center justify-between gap-3">
+    <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
       <label
         forhtml={name}
         className="flex flex-row items-center gap-4 cursor-pointer"

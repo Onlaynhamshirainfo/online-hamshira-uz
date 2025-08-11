@@ -20,6 +20,7 @@ export default function CheckboxChecked({
           id={name}
           name={name}
           value={item?.id}
+          defaultChecked={current === item?.id}
           {...register(name, validation)}
         />
         <span>

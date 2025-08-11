@@ -22,6 +22,7 @@ export default function Counter({
   const [currentCount, setCurrentCount] = useState(count);
 
   const handleClick = (type) => {
+    if(type == 'plus' && currentCount == 10) return;
     // toast.error(intl.formatMessage({ id: "servicesSelect" }));
     if (type === "minus" && currentCount > 1) {
       const newCount = currentCount - 1;

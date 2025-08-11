@@ -28,6 +28,7 @@ export default function InfoModal() {
     handleSubmit,
     formState: { errors, isDirty },
     reset,
+    setValue
   } = useForm({
     defaultValues: {
       // first_name: info?.first_name ?? "",
@@ -48,7 +49,7 @@ export default function InfoModal() {
     try {
       setReqLoading(true);
       setFormError(null);
-      const date = converUnivDate(data?.born)
+      const date = converUnivDate(data?.born);
       const response = await axios.post(
         `client/fill-data?expand=contact.branch`,
         {
@@ -76,7 +77,7 @@ export default function InfoModal() {
       reset();
     } catch (e) {
       toast.error(e?.response?.data?.name);
-      setFormError(e?.response?.data?.errors)
+      setFormError(e?.response?.data?.errors);
     } finally {
       setReqLoading(false);
     }
@@ -138,6 +139,20 @@ export default function InfoModal() {
           id="born"
           register={register}
           errors={formError}
+          validation={{
+            onChange: (e) => {
+              const val = e.target.value;
+              const [year, month, day] = val.split("-");
+              if (year?.length > 4) {
+                // faqat 4 ta yil belgisi qoldiramiz
+                const fixedYear = year.slice(0, 4);
+                setValue(
+                  "born",
+                  `${fixedYear}-${month || "01"}-${day || "01"}`
+                );
+              }
+            },
+          }}
         />
         <Dropdown
           data={branches?.data}

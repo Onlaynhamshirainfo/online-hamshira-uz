@@ -27,6 +27,7 @@ export default function ConnectsAdd() {
     handleSubmit,
     formState: { errors, isDirty },
     reset,
+    setValue
   } = useForm({
     defaultValues: {
       type: "",
@@ -53,20 +54,21 @@ export default function ConnectsAdd() {
   );
 
   const submitFn = async (data) => {
-    const date = converUnivDate(data?.birthday);
+    const date = await converUnivDate(data?.birthday);
     try {
       const formData = new FormData();
+
+      console.log(date);
       formData.append("fullname", data?.fullname);
       formData.append("birthday", Number(date));
       formData.append("gender", data?.gender);
-      formData.append("weight", " ");
-      formData.append("about", " ");
+      // formData.append("weight", " ");
+      // formData.append("about", " ");
       formData.append("type", data?.type);
       formData.append("picture_file", image);
 
       setReqLoading(true);
       setFormError(null);
-      console.error(image);
 
       const response = await axios.post(`relative/create`, formData, {
         headers: {
@@ -141,6 +143,20 @@ export default function ConnectsAdd() {
             id="birthday"
             register={register}
             errors={formError}
+            validation={{
+              onChange: (e) => {
+                const val = e.target.value;
+                const [year, month, day] = val.split("-");
+                if (year?.length > 4) {
+                  // faqat 4 ta yil belgisi qoldiramiz
+                  const fixedYear = year.slice(0, 4);
+                  setValue(
+                    "birthday",
+                    `${fixedYear}-${month || "01"}-${day || "01"}`
+                  );
+                }
+              },
+            }}
           />
           {/* <Input
             type="text"

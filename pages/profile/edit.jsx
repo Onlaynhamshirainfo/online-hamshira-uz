@@ -28,6 +28,7 @@ export default function Edit() {
     handleSubmit,
     formState: { errors, isDirty },
     reset,
+    setValue,
   } = useForm({
     defaultValues: {
       first_name: info?.first_name || "",
@@ -36,7 +37,7 @@ export default function Edit() {
       // weight: info?.contact?.weight || "",
       gender: info?.contact?.gender || "",
       branch_id: info?.contact?.branch?.id || "",
-      photo: info?.photo || "",
+      photo: "",
       born: info?.contact?.born || "",
     },
   });
@@ -92,7 +93,7 @@ export default function Edit() {
         timer: 3000,
         showConfirmButton: false,
       });
-      
+
       setTimeout(() => {
         router.push(`/${router.locale}/profile/`);
         router.reload();
@@ -154,6 +155,20 @@ export default function Edit() {
             id="born"
             register={register}
             errors={formError}
+            validation={{
+              onChange: (e) => {
+                const val = e.target.value;
+                const [year, month, day] = val.split("-");
+                if (year?.length > 4) {
+                  // faqat 4 ta yil belgisi qoldiramiz
+                  const fixedYear = year.slice(0, 4);
+                  setValue(
+                    "born",
+                    `${fixedYear}-${month || "01"}-${day || "01"}`
+                  );
+                }
+              },
+            }}
           />
           {/* <Input
             type="text"
@@ -172,6 +187,7 @@ export default function Edit() {
             typeDropdown={"city"}
           /> */}
           <File
+            currentDrop={info?.photo}
             id={"photo"}
             name={"photo"}
             title={intl.formatMessage({ id: "profileImage" })}
@@ -180,6 +196,7 @@ export default function Edit() {
           />
           <Dropdown
             data={branches?.data}
+            currentDrop={info?.contact?.branch}
             register={register}
             name={"branch_id"}
             title={intl.formatMessage({ id: "city" })}

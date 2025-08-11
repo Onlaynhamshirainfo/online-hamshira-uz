@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useIntl } from "react-intl";
 import { CustomImage, Error } from "..";
+import getConfig from "next/config";
 
 export default function File({
   name,
@@ -10,10 +11,17 @@ export default function File({
   title,
   getImages,
   errors,
+  currentDrop,
   type,
 }) {
   const intl = useIntl();
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState(
+    typeof currentDrop == "string"
+      ? [currentDrop]
+      : typeof currentDrop == "object"
+      ? currentDrop
+      : []
+  );
 
   const handleFileChange = (event) => {
     const selectedFiles = Array.from(event.target.files);
@@ -24,7 +32,7 @@ export default function File({
     );
 
     if (hasSVGFile) {
-      toast.error(intl.formatMessage({id: "imageError"}));
+      toast.error(intl.formatMessage({ id: "imageError" }));
       return;
     }
 
@@ -104,7 +112,11 @@ export default function File({
             <div className="w-16 h-16 rounded-xl full__image overflow-hidden relative z-0">
               {/* {image.name} */}
               <CustomImage
-                src={URL.createObjectURL(image)}
+                src={
+                  typeof image == "string"
+                    ? `${getConfig().publicRuntimeConfig.baseUrl}/${image}`
+                    : URL.createObjectURL(image)
+                }
                 alt={image?.name}
                 title={image?.name}
               />

@@ -84,6 +84,7 @@ export default function CodeModal() {
       func={() => dispatch(toggleCodeModal())}
       body={intl.formatMessage({ id: "codeMessage" })}
       title={intl.formatMessage({ id: "code" })}>
+        
       <div className="flex flex-col gap-4 w-[95%]">
         <CodeInputs onSubmit={(values) => submitFn(values)} />
         <Error errors={errors} name={"code"}/>

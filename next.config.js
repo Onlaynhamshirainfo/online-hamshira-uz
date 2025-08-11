@@ -7,11 +7,11 @@ const nextConfig = {
     localeDetection: false,
     locales: ["ru", "uz", "en"],
   },
-  compiler: {
-    removeConsole: {
-      exclude: ["error"],
-    },
-  },
+  // compiler: {
+  //   removeConsole: {
+  //     exclude: ["error"],
+  //   },
+  // },
   images: {
     // like ['domen.uz']
     domains: ["dashboard.onlaynhamshira.uz"],

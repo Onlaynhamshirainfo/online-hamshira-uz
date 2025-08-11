@@ -110,7 +110,7 @@ export default function InfoForm() {
       : `${rel?.type_name} (${rel?.fullname})`,
     photo: rel?.photo ? rel?.photo : "/admin/images/defaultAvatar.png",
   }));
-
+ 
   return (
     <form className="flex flex-col gap-10" onSubmit={handleSubmit(submitFn)}>
       <Dropdown

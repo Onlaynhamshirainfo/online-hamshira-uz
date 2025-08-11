@@ -1,6 +1,6 @@
 import { useIntl } from "react-intl";
 import Seo from "../../components/Seo/Seo";
-import { MainProfile, NewsCard, RegsiterNow, Settings } from "../../components";
+import { MainProfile, NewsCard, RegsiterNow, ReturnBack, Settings } from "../../components";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import useSWR from "swr";
@@ -34,6 +34,8 @@ export default function News() {
       />
       <div className="container">
         <main className="flex flex-col gap-7 py-5">
+          <ReturnBack url="profile/connects" isPadding />
+
           <h1 className="text-text-primary leading-normal font-semibold text-lg sm:text-xl text-center">
             {intl.formatMessage({ id: "news" })}
           </h1>
@@ -41,13 +43,15 @@ export default function News() {
             <button
               type="button"
               className={`${active == 1 ? "border-b-2 border-b-green" : ""}`}
-              onClick={() => setActive(1)}>
+              onClick={() => setActive(1)}
+            >
               {intl.formatMessage({ id: "news" })}
             </button>
             <button
               type="button"
               className={`${active == 2 ? "border-b-2 border-b-green" : ""}`}
-              onClick={() => setActive(2)}>
+              onClick={() => setActive(2)}
+            >
               {intl.formatMessage({ id: "archive" })}
             </button>
           </div>

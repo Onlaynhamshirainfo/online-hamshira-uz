@@ -43,45 +43,41 @@ export default function MainOrders({ info }) {
   return (
     <div className="container">
       <div className="flex flex-col items-center justify-center w-full gap-5">
-        <div className="flex flex-col gap-2 items-center justify-center text-center">
-          <h1 className="text-text-primary leading-normal font-semibold text-lg sm:text-xl">
-            {intl.formatMessage({ id: "orderTitle" })}
-          </h1>
-          {!orders?.data || orders?.data?.length == 0 ? (
-            <p className="text-text-secondary leading-normal font-normal text-base">
-              {intl.formatMessage({ id: "orderEmpty" })}
-            </p>
-          ) : (
-            <></>
-          )}
+        <h1 className="text-text-primary leading-normal font-semibold text-lg sm:text-xl">
+          {intl.formatMessage({ id: "orderTitle" })}
+        </h1>
+        <div className="flex flex-row flex-wrap items-end justify-center gap-5 sm:gap-10 text-text-primary text-sm sm:text-base font-medium overflow-x-auto">
+          <button
+            type="button"
+            className={`${active == 0 ? "border-b-2 border-b-green" : ""}`}
+            onClick={() => handleTabs(0)}
+          >
+            {intl.formatMessage({ id: "all" })}
+          </button>
+          <button
+            type="button"
+            className={`${active == 10 ? "border-b-2 border-b-green" : ""}`}
+            onClick={() => handleTabs(10)}
+          >
+            {intl.formatMessage({ id: "progress" })}
+          </button>
+          <button
+            type="button"
+            className={`${active == 12 ? "border-b-2 border-b-green" : ""}`}
+            onClick={() => handleTabs(12)}
+          >
+            {intl.formatMessage({ id: "done" })}
+          </button>
         </div>
-        {orders?.data && orders?.data?.length > 0 ? (
-          <div className="flex flex-row flex-wrap items-end justify-center gap-5 sm:gap-10 text-text-primary font-medium">
-            <button
-              type="button"
-              className={`${active == 0 ? "border-b-2 border-b-green" : ""}`}
-              onClick={() => handleTabs(0)}
-            >
-              {intl.formatMessage({ id: "all" })}
-            </button>
-            <button
-              type="button"
-              className={`${active == 10 ? "border-b-2 border-b-green" : ""}`}
-              onClick={() => handleTabs(10)}
-            >
-              {intl.formatMessage({ id: "progress" })}
-            </button>
-            <button
-              type="button"
-              className={`${active == 12 ? "border-b-2 border-b-green" : ""}`}
-              onClick={() => handleTabs(12)}
-            >
-              {intl.formatMessage({ id: "done" })}
-            </button>
-          </div>
+
+        {!orders?.data || orders?.data?.length == 0 ? (
+          <p className="text-text-secondary text-sm sm:text-base leading-normal text-center font-normal text-base mt-32">
+            {intl.formatMessage({ id: "orderEmpty" })}
+          </p>
         ) : (
           <></>
         )}
+
         <div className="flex flex-col w-full gap-3">
           {filteredOrders ? (
             filteredOrders?.map((item, index) => {

@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import useSWR from "swr";
 import { Dropdown } from "..";
-import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getSpecialistPrices,
@@ -91,7 +90,7 @@ export default function IllnessLists() {
       )}
       <div
         className="p-5 bg-white rounded-3xl flex items-center justify-between w-full 
-        text-text-primary mt-20"
+        text-text-primary mt-5"
       >
         <h3 className="font-semibold text-sm sm:text-base">
           {intl.formatMessage({ id: "total" })}:

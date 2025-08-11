@@ -51,7 +51,6 @@ export default function SliderModal() {
   //   }
   // }, [slides]);
 
-
   // if (!slides?.data || slides?.data === 0) {
   //   return null;
   // }
@@ -60,12 +59,14 @@ export default function SliderModal() {
     <Wrapper
       active={sliderModal}
       func={() => dispatch(toggleSliderModal())}
-      type={"slider"}>
+      type={"slider"}
+    >
       <Swiper
         pagination={{ clickable: true }}
         modules={[Pagination]}
         ref={swiperRef}
-        className="slider__modal w-full h-full">
+        className="slider__modal w-full h-full"
+      >
         {slides?.data?.map((item, index) => {
           return (
             <SwiperSlide
@@ -74,7 +75,8 @@ export default function SliderModal() {
               style={{
                 backgroundImage: `url(${process.env.NEXT_PUBLIC_IMAGE_BASE}${item?.url})`,
                 backgroundSize: `cover`,
-              }}>
+              }}
+            >
               <div className="w-11/12 small:w-[85%] mx-auto h-full flex flex-col items-center justify-end gap-2 text-white text-center pb-[140px] ">
                 <h1 className="leading-normal font-bold text-xl sm:text-2xl">
                   {item?.title}
@@ -89,14 +91,16 @@ export default function SliderModal() {
       </Swiper>
       <button
         type="button"
-        className="absolute bottom-5 left-2/4 translate-x-[-50%] z-20 bg-white w-16 h-16 rounded-xl flex items-center justify-center"
-        onClick={() => slideNextFn()}>
+        className="absolute bottom-5 left-2/4 translate-x-[-50%] z-20 bg-white w-16 h-16 rounded-xl flex items-center justify-center shadow-md border border-gray"
+        onClick={() => slideNextFn()}
+      >
         <svg
           width="32"
           height="32"
           viewBox="0 0 32 32"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg">
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path
             d="M19.2401 25.0935C18.9867 25.0935 18.7334 25.0002 18.5334 24.8002C18.1467 24.4135 18.1467 23.7735 18.5334 23.3868L25.9201 16.0002L18.5334 8.61349C18.1467 8.22682 18.1467 7.58682 18.5334 7.20016C18.9201 6.81349 19.5601 6.81349 19.9467 7.20016L28.0401 15.2935C28.4267 15.6802 28.4267 16.3202 28.0401 16.7068L19.9467 24.8002C19.7467 25.0002 19.4934 25.0935 19.2401 25.0935Z"
             fill="#242424"

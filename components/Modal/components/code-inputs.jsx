@@ -27,7 +27,8 @@ export default function CodeInputs({ onSubmit }) {
           required
           maxLength={1}
           autoComplete="off"
-          className="px-5 py-4 border-grey-5 border bg-white  w-full placeholder:leading-normal placeholder:text-text-secondary placeholder:font-normal placeholder:text-base focus:border-green rounded-xl text-center"
+          type="number"
+          className="no-spinner px-5 py-4 border-grey-5 border bg-white  w-full placeholder:leading-normal placeholder:text-text-secondary placeholder:font-normal placeholder:text-base focus:border-green rounded-xl text-center"
           onChange={(e) => handleInputChange(index, e.target.value)}
           onKeyDown={(e) => {
             if (e.key === "Backspace" && !e.target.value && index > 0) {

@@ -27,6 +27,7 @@ export default function InfoForm() {
     handleSubmit,
     formState: { errors, isDirty },
     reset,
+    setValue,
   } = useForm({
     defaultValues: {},
   });
@@ -144,6 +145,20 @@ export default function InfoForm() {
                 id="date"
                 register={register}
                 errors={formError}
+                validation={{
+                  onChange: (e) => {
+                    const val = e.target.value;
+                    const [year, month, day] = val.split("-");
+                    if (year?.length > 4) {
+                      // faqat 4 ta yil belgisi qoldiramiz
+                      const fixedYear = year.slice(0, 4);
+                      setValue(
+                        "date",
+                        `${fixedYear}-${month || "01"}-${day || "01"}`
+                      );
+                    }
+                  },
+                }}
               />
               <Input
                 type="time"
