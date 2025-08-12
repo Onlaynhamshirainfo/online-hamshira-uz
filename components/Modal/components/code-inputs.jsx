@@ -25,6 +25,7 @@ export default function CodeInputs({ onSubmit }) {
           ref={(el) => (inputRefs.current[index] = el)}
           placeholder={"*"}
           required
+          inputMode="numeric" 
           maxLength={1}
           autoComplete="off"
           type="number"

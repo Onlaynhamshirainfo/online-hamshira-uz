@@ -29,8 +29,7 @@ function page({ info, params }) {
   ];
 
   return (
-    <section className="container">
-      {console.log(info)}
+    <section className="container"> 
       <ReturnBack url={""} />
       <main className="flex flex-col items-start leading-normal gap-3 sm:gap-5">
         <Title>{intl.formatMessage({ id: "orderInfo" })}</Title>

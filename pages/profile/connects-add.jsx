@@ -58,7 +58,6 @@ export default function ConnectsAdd() {
     try {
       const formData = new FormData();
 
-      console.log(date);
       formData.append("fullname", data?.fullname);
       formData.append("birthday", Number(date));
       formData.append("gender", data?.gender);
