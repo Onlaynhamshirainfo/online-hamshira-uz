@@ -5,6 +5,13 @@ function updateOptions(options, auth) {
     headers: {
       ...options.headers,
       Accept: "application/json",
+
+      ...(typeof window !== "undefined" &&
+      location.host === "hambi.onlaynhamshira.uz"
+        ? {
+            From: "hambi",
+          }
+        : {}),
     },
   };
   if (localStorage.auth__key && auth) {

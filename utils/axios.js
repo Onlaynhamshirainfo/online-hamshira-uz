@@ -4,14 +4,13 @@ export default axios.create({
   baseURL: process.env.API,
   headers: {
     Accept: "application/json",
+    ...(typeof window !== "undefined" &&
+    location.host === "hambi.onlaynhamshira.uz"
+      ? {
+          From: "hambi",
+        }
+      : {}),
   },
-
-  ...(typeof window !== "undefined" &&
-  location.host === "hambi.onlaynhamshira.uz"
-    ? {
-        From: "hambi",
-      }
-    : {}),
 });
 
 export const authAxios = axios.create({
