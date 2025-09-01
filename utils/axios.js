@@ -5,9 +5,14 @@ export default axios.create({
   headers: {
     Accept: "application/json",
   },
+
+  ...(typeof window !== "undefined" &&
+  location.host === "hambi.onlaynhamshira.uz"
+    ? {
+        From: "hambi",
+      }
+    : {}),
 });
-
-
 
 export const authAxios = axios.create({
   baseURL: process.env.API,
@@ -16,7 +21,7 @@ export const authAxios = axios.create({
     Authorization: `Bearer ${
       typeof window !== "undefined" ? localStorage?.getItem("auth__key") : null
     }`,
- 
+
     ...(typeof window !== "undefined" &&
     location.host === "hambi.onlaynhamshira.uz"
       ? {
