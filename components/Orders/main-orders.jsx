@@ -24,8 +24,7 @@ export default function MainOrders({ info }) {
           },
         },
         {},
-        true
-      )
+      ),
   );
 
   const handleTabs = (tab) => {

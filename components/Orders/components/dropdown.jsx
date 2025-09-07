@@ -18,7 +18,7 @@ export default function Dropdown({
   getArrivalTypes,
   required,
   isLogo,
-  isActive, 
+  isActive,
 }) {
   const intl = useIntl();
   const [active, setActive] = useState(isActive || false);
@@ -88,10 +88,10 @@ export default function Dropdown({
                     </span>
                   </span>
                   <span className="flex-1">
-                  {item?.name ||
-                    (item?.name?.trim() == currentDrop?.first_name
-                      ? intl.formatMessage({ id: "me" })
-                      : "")}
+                    {item?.name ||
+                      (item?.name?.trim() == currentDrop?.first_name
+                        ? intl.formatMessage({ id: "me" })
+                        : "")}
                   </span>
                 </label>
               );
@@ -276,7 +276,6 @@ export default function Dropdown({
     );
   }
 
-
   return (
     <DropdownWrapper title={title} isTitle isLogo>
       <div className="relative z-0 flex flex-col bg-white rounded-3xl border-grey-5 border">
@@ -304,9 +303,12 @@ export default function Dropdown({
                 />
               </span>
             )}
-            {isLogo
-              ? title || activeInfo?.name
-              : activeInfo?.name || intl.formatMessage({ id: "me" })}
+            {
+              isLogo
+                ? title || activeInfo?.name
+                : activeInfo?.name ||
+                  `${JSON.parse(localStorage.getItem("auth__info")).first_name} ${JSON.parse(localStorage.getItem("auth__info")).last_name}` /* intl.formatMessage({ id: "me" })} */
+            }
           </div>
           <SelectIcon isActive={active} />
         </div>
@@ -321,7 +323,7 @@ export default function Dropdown({
           {data?.map((item, index) => {
             return (
               <label
-                forhtml={name}
+                htmlFor={name}
                 key={index}
                 onClick={() => changeCurrentActive(item)}
                 className="flex flex-row items-center gap-4 cursor-pointer"
@@ -350,10 +352,12 @@ export default function Dropdown({
                     </svg>
                   </span>
                 </span>
-                {item?.name ||
-                  (item?.name?.trim() == currentDrop?.first_name
-                    ? intl.formatMessage({ id: "me" })
-                    : "")}
+                {item?.name === intl.formatMessage({ id: "me" })
+                  ? `${JSON.parse(localStorage.getItem("auth__info")).first_name} ${JSON.parse(localStorage.getItem("auth__info")).last_name}`
+                  : item?.name ||
+                    (item?.name?.trim() === currentDrop?.first_name
+                      ? `${JSON.parse(localStorage.getItem("auth__info")).first_name} ${JSON.parse(localStorage.getItem("auth__info")).last_name}` /* intl.formatMessage({ id: "me" }) */
+                      : "")}
               </label>
             );
           })}

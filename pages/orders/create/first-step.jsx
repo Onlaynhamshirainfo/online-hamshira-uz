@@ -26,7 +26,7 @@ export default function FirstStep() {
       />
       <main className="container">
         <div className="flex flex-col gap-7 py-5">
-          <CancelOrder />
+          {/*<CancelOrder />*/}
           <Loader per={"25%"} />
           <InfoForm />
         </div>

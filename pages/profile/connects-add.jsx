@@ -27,7 +27,7 @@ export default function ConnectsAdd() {
     handleSubmit,
     formState: { errors, isDirty },
     reset,
-    setValue
+    setValue,
   } = useForm({
     defaultValues: {
       type: "",
@@ -49,8 +49,7 @@ export default function ConnectsAdd() {
         },
       },
       {},
-      true
-    )
+    ),
   );
 
   const submitFn = async (data) => {
@@ -151,7 +150,7 @@ export default function ConnectsAdd() {
                   const fixedYear = year.slice(0, 4);
                   setValue(
                     "birthday",
-                    `${fixedYear}-${month || "01"}-${day || "01"}`
+                    `${fixedYear}-${month || "01"}-${day || "01"}`,
                   );
                 }
               },

@@ -16,7 +16,7 @@ export default function IllnessLists() {
   const router = useRouter();
   const [reqLoading, setReqLoading] = useState(false);
   const { defaultSum, totalSum, currentPrice } = useSelector(
-    (state) => state.services
+    (state) => state.services,
   );
   const dispatch = useDispatch();
 
@@ -38,7 +38,7 @@ export default function IllnessLists() {
           : services
               ?.map(
                 (item, i) =>
-                  `ids[]=${item}${i === services.length - 1 ? "" : "&"}`
+                  `ids[]=${item}${i === services.length - 1 ? "" : "&"}`,
               )
               .join("")
       }`,
@@ -53,8 +53,7 @@ export default function IllnessLists() {
           },
         },
         {},
-        true
-      )
+      ),
   );
 
   const continouFn = () => {

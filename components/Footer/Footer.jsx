@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
+import Link from "next/link";
 
 export default function Footer() {
   const intl = useIntl();
@@ -53,27 +54,30 @@ export default function Footer() {
         {tabs?.map((item, index) => {
           let isTrue = router?.asPath == item?.link;
           return (
-            <a
+            <Link
               href={`/${router.locale}${item?.link}`}
               // onClick={() => router.push(`/${item?.link}`)}
               key={index}
-              className={`footer__tabs flex flex-col justify-center items-center gap-2 px-2 py-4 xs:p-5 relative z-0 ${
-                isTrue ? "footer__active" : ""
-              }`}
             >
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: item?.icon,
-                }}
-              ></span>
-              <span
-                className={`${
-                  isTrue ? "text-text-primary" : "text-gray"
-                }  leading-normal font-medium text-xs xs:text-base capitalize`}
+              <a
+                className={`footer__tabs flex flex-col justify-center items-center gap-2 px-2 py-4 xs:p-5 relative z-0 ${
+                  isTrue ? "footer__active" : ""
+                }`}
               >
-                {item?.name}
-              </span>
-            </a>
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: item?.icon,
+                  }}
+                ></span>
+                <span
+                  className={`${
+                    isTrue ? "text-text-primary" : "text-gray"
+                  }  leading-normal font-medium text-xs xs:text-base capitalize`}
+                >
+                  {item?.name}
+                </span>
+              </a>
+            </Link>
           );
         })}
       </div>

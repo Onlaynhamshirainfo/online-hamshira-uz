@@ -11,6 +11,7 @@ import Button from "../Forms/button";
 import { changeOrderImages } from "../../redux/slice/settings";
 import { useFiles } from "../../context/useFiles";
 import toast from "react-hot-toast";
+import { data } from "autoprefixer";
 
 export default function InfoForm() {
   const intl = useIntl();
@@ -44,8 +45,7 @@ export default function InfoForm() {
           },
         },
         {},
-        true
-      )
+      ),
   );
 
   const { data: reasons } = useSWR(
@@ -59,22 +59,20 @@ export default function InfoForm() {
           },
         },
         {},
-        true
-      )
+      ),
   );
 
   const submitFn = async (data) => {
-
-    if(!data?.reason){
-      toast.error(intl.formatMessage({id: "reasonCheck"}))
-    }else{
+    if (!data?.reason) {
+      toast.error(intl.formatMessage({ id: "reasonCheck" }));
+    } else {
       localStorage.setItem("orderReasons", JSON.stringify(data?.reason || {}));
       localStorage.setItem("orderRelatives", JSON.stringify(data?.relative_id));
       localStorage.setItem(
         "orderRelativePerson",
         JSON.stringify(
-          relatives?.data?.find((item) => item.id == data?.relative_id)
-        )
+          relatives?.data?.find((item) => item.id == data?.relative_id),
+        ),
       );
       router.push(`/${router.locale}/orders/create/second-step`);
     }
@@ -110,7 +108,7 @@ export default function InfoForm() {
       : `${rel?.type_name} (${rel?.fullname})`,
     photo: rel?.photo ? rel?.photo : "/admin/images/defaultAvatar.png",
   }));
- 
+
   return (
     <form className="flex flex-col gap-10" onSubmit={handleSubmit(submitFn)}>
       <Dropdown

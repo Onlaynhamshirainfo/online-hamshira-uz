@@ -1,5 +1,5 @@
 // auth fetcher
-function updateOptions(options, auth) {
+function updateOptions(options) {
   const update = {
     ...options,
     headers: {
@@ -14,7 +14,7 @@ function updateOptions(options, auth) {
         : {}),
     },
   };
-  if (localStorage.auth__key && auth) {
+  if (localStorage.auth__key) {
     update.headers = {
       ...update.headers,
       Authorization: `Bearer ${localStorage.auth__key}`,
@@ -23,18 +23,12 @@ function updateOptions(options, auth) {
   return update;
 }
 
-export default function fetcher(
-  url = "",
-  options = {},
-  params = {},
-  auth = false
-) {
+export default function fetcher(url = "", options = {}, params = {}) {
   const __url = new URL(process.env.API + url);
   Object.keys(params).forEach((key) =>
-    __url.searchParams.append(key, params[key])
+    __url.searchParams.append(key, params[key]),
   );
-
-  return fetch(__url, updateOptions(options, auth)).then((res) => {
+  return fetch(__url, updateOptions(options)).then((res) => {
     if (res.status === 401) {
       localStorage.removeItem("auth__key");
       localStorage.removeItem("auth__phone");

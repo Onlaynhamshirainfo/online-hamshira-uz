@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { getItemsFromLocal } from "../../redux/slice/settings";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function Header() {
   const intl = useIntl();
@@ -30,33 +31,34 @@ export default function Header() {
   return (
     <header className="container">
       <div className="py-3 flex flex-row items-center justify-between relative z-20">
-        <a
+        <Link
           href="/"
           title={intl.formatMessage({ id: "company" })}
-          className="block w-[180px] sm:w-[240px]"
+          className="block w-[180px] sm:w-[240px] pointer"
         >
-          <Image
-            src="/images/logo.svg"
-            alt="logo"
-            title={intl.formatMessage({ id: "company" })}
-            width={200}
-            height={60}
-            // blurdataurl="data:image/jpeg ,data:image/png , data:image/svg "
-            // placeholder="blur"
-          />
-        </a>
-        {info ? (
-          <a
-            href={`/${router.locale}/profile`}
-            className="w-12 h-12 overflow-hidden rounded-full full__image cursor-pointer"
-          >
+          <a>
             <Image
-              src={`${process.env.NEXT_PUBLIC_IMAGE_BASE}${info?.photo}`}
-              width={0}
-              height={0}
-              layout="responsive"
+              src="/images/logo.svg"
+              alt="logo"
+              title={intl.formatMessage({ id: "company" })}
+              width={200}
+              height={60}
+              // blurdataurl="data:image/jpeg ,data:image/png , data:image/svg "
+              // placeholder="blur"
             />
           </a>
+        </Link>
+        {info ? (
+          <Link href={`/${router.locale}/profile`}>
+            <a className="w-12 h-12 overflow-hidden rounded-full full__image cursor-pointer">
+              <Image
+                src={`${process.env.NEXT_PUBLIC_IMAGE_BASE}${info?.photo}`}
+                width={0}
+                height={0}
+                layout="responsive"
+              />
+            </a>
+          </Link>
         ) : (
           <button
             type="button"

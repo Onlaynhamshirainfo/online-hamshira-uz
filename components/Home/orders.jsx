@@ -24,8 +24,7 @@ export default function OrdersHome() {
           },
         },
         {},
-        true
-      )
+      ),
   );
 
   if (!orders?.data || orders?.data == 0) {

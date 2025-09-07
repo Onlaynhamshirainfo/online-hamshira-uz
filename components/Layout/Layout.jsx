@@ -1,4 +1,3 @@
-import i18nextConfig from "../../next.config";
 import Head from "next/head";
 import {
   CodeModal,
@@ -17,17 +16,14 @@ import {
 } from "../../components";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  changeLangStartModal,
-  changeSliderModal,
-} from "../../redux/slice/modals";
+import { changeLangStartModal, changeSliderModal } from "@/redux/slice/modals";
 import AdsModal from "../Modal/start/ads-modal";
 import CancelOrdering from "../Modal/cancel-ordering";
 
 const Layout = ({ children }) => {
   const dispatch = useDispatch();
-  const { sliderModal, infoModal, orderCancel , adsModal } = useSelector(
-    (state) => state.modals
+  const { sliderModal, infoModal, orderCancel, adsModal } = useSelector(
+    (state) => state.modals,
   );
   const [active, setActive] = useState(true);
 
@@ -96,7 +92,7 @@ const Layout = ({ children }) => {
 
       {/* Body */}
       <div className="wrapper">
-        <div className="app relative z-0">
+        <div className="app relative z-0 main-container">
           {/* Header */}
           <Header />
 

@@ -8,20 +8,20 @@ import messages_uz from "../lang/uz.json";
 import messages_ru from "../lang/ru.json";
 import messages_en from "../lang/en.json";
 import { IntlProvider } from "react-intl";
-import { LangProvider } from "../context/useLang";
+import { LangProvider } from "@/context/useLang";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { SkeletonTheme } from "react-loading-skeleton";
 import NProgress from "nprogress";
-import { initCollapse } from "../utils/collapse";
+import { initCollapse } from "@/utils/collapse";
 import "react-loading-skeleton/dist/skeleton.css";
-import { FilesProvider } from "../context/useFiles";
+import { FilesProvider } from "@/context/useFiles";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
-  const [locale, setLocale] = useState(router.locale);
-  const [texts, setTexts] = useState({});
+  const [_, setLocale] = useState(router.locale);
+  const [texts] = useState({});
 
   // useEffect(() => {
   // 	const fetchTexts = async () => {

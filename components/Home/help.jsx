@@ -10,16 +10,19 @@ export default function HelpHome() {
   const intl = useIntl();
   const router = useRouter();
   const { data: helps } = useSWR(
-    ["speciality/index?expand=price", router.locale],
+    [
+      `speciality/${localStorage.auth__key ? "list" : "index"}?expand=price`,
+      router.locale,
+    ],
     (url) =>
       fetcher(url, {
         headers: {
           "Accept-Language": router.locale,
         },
-      })
+      }),
   );
 
-  if (!helps?.data || helps?.data?.length == 0) {
+  if (!helps?.data || helps?.data?.length === 0) {
     return (
       <div className="container">
         <div className="w-full grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-4">
