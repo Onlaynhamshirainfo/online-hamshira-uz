@@ -220,7 +220,7 @@ img {
     cursor: pointer;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 450px) {
     body {
         height: 100vh;
         overflow: hidden;
