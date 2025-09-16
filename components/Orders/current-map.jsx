@@ -5,8 +5,9 @@ import { authAxios } from "../../utils/axios";
 import Button from "../Forms/button";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
+import MobileButton from "@/components/Forms/mobileButton";
 
-export default function CurrentMap() {
+export default function CurrentMap({ mapHeight = 0 }) {
   const [locationDetails, setLocationDetails] = useState(null);
   const intl = useIntl();
   const router = useRouter();
@@ -46,17 +47,20 @@ export default function CurrentMap() {
   };
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className={`flex flex-col gap-3 h-[${mapHeight}px]`}>
       {/* <div className="flex flex-col lg:flex-row justify-start text-text-primary">
         <h2 className="font-semibold text-base ">
           {intl.formatMessage({ id: "chooseMap" })}
         </h2>
         <p className="font-normal">{locationDetails}</p>
       </div> */}
-      <MapWithPlacemark onLocationSelect={handleLocationSelect} />
-      <Button type="button" onClick={() => submitFn()} disabled={reqLoading}>
+      <MapWithPlacemark onLocationSelect={handleLocationSelect} mapHeight={mapHeight} />
+      {/*<Button type="button" onClick={() => submitFn()} disabled={reqLoading}>*/}
+      {/*  {intl.formatMessage({ id: "continue" })}*/}
+      {/*</Button>*/}
+      <MobileButton type="button" onClick={() => submitFn()} disabled={reqLoading}>
         {intl.formatMessage({ id: "continue" })}
-      </Button>
+      </MobileButton>
     </div>
   );
 }

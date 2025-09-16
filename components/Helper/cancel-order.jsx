@@ -13,7 +13,7 @@ export default function CancelOrder({url, isRouter}) {
   };
 
   return (
-    <div className="flex flex-row items-center justify-between gap-2">
+    <div className="flex flex-row items-center justify-between gap-2 header-back-container">
       <div className="flex flex-col  items-start justify-start gap-3">
         <ReturnBack isPadding url={url} isRouter={isRouter} />
         <h1 className="text-text-primary leading-normal font-semibold text-xl">

@@ -8,7 +8,7 @@ export default function MobileButton({
   return (
     <button
       type={type}
-      className="w-full linear py-4 px-5 text-white leading-normal font-medium text-base rounded-full mobile-fixed"
+      className="w-full linear py-4 px-5 text-white leading-normal font-medium text-base rounded-full mobile-fixed map-btn"
       {...pageProps}
     >
       {children}

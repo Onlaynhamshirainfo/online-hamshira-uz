@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Error, SelectIcon } from "../..";
+import React, { useState } from "react";
+import { SelectIcon } from "../..";
 import Image from "next/image";
-import { useSelector } from "react-redux";
 import { useIntl } from "react-intl";
-import Counter from "./counter";
 import CounterCheckbox from "./counter-checkbox";
-import toast from "react-hot-toast";
 
 export default function Dropdown({
   data,
@@ -22,7 +19,6 @@ export default function Dropdown({
 }) {
   const intl = useIntl();
   const [active, setActive] = useState(isActive || false);
-  const [checked, setChecked] = useState(false);
   const [activeInfo, setActiveInfo] = useState(currentDrop);
 
   if (!data) {
@@ -36,7 +32,7 @@ export default function Dropdown({
     }
   };
 
-  if (typeDropdown == "moreSelection") {
+  if (typeDropdown === "moreSelection") {
     return (
       <DropdownWrapper title={title} isTitle>
         <div className="relative z-0 flex flex-col bg-white rounded-3xl border-grey-5 border">

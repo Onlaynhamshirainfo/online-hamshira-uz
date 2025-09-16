@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import {
   YMaps,
   Map,
@@ -7,13 +7,18 @@ import {
   ZoomControl,
 } from "@pbe/react-yandex-maps";
 
-const MapWithPlacemark = ({ onLocationSelect }) => {
+const MapWithPlacemark = ({ onLocationSelect, mapHeight = 0 }) => {
   const [placemarkGeometry, setPlacemarkGeometry] = useState(null);
+  const [placemarkClass, setPlaceMarkClass] = useState("default-placemark");
+  const [location, setLocation] = useState({
+    latitude: 40.9,
+    longitude: 69.9,
+  });
 
-  const handleMapClick = (event) => {
-    setPlacemarkGeometry(event.get("coords"));
-    onLocationSelect(event.get("coords"));
-  };
+  // const handleMapClick = (event) => {
+  //   setPlacemarkGeometry(event.get("coords"));
+  //   onLocationSelect(event.get("coords"));
+  // };
 
   const handleGeoLocationClick = () => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -22,28 +27,67 @@ const MapWithPlacemark = ({ onLocationSelect }) => {
       onLocationSelect([latitude, longitude]);
     });
   };
+  const handleBoundsChange = (event) => {
+    const mapInstance = event.get('target');
+    const newCenter = mapInstance.getCenter(); // Получаем центр карты
+    setPlacemarkGeometry(newCenter);
+    onLocationSelect(newCenter);
+  };
 
+  function handleActionStart(_) {
+    setPlaceMarkClass("placemark-action");
+  }
+
+  function handleActionEnd(_) {
+    setPlaceMarkClass("default-placemark");
+  }
+
+
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && 'geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLocation({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          });
+        },
+        (err) => {
+          // setError(err.message);
+          console.log(err);
+        }
+      );
+    } else {
+      // setError('Геолокация недоступна в этом браузере');
+    }
+  }, []);
+  // h-[320px]
+  // md:h-[400px]
   return (
-    <div className="w-full h-[320px] md:h-[400px] overflow-hidden rounded-2xl">
+    <div className={`w-full h-[${mapHeight}] overflow-hidden rounded-2xl relative`}>
       <YMaps>
         <Map
-          defaultState={{ center: [40.9, 69.9], zoom: 8 }}
+          defaultState={{ center: [location.latitude, location.longitude], zoom: 16 }}
           width="100%"
-          height="100%"
+          height={mapHeight}
           options={{ mapType: "yandex#hybrid" }}
-          onClick={handleMapClick}
+          // onClick={handleMapClick}
+          onBoundsChange={handleBoundsChange}
+          onActionBegin={handleActionStart}
+          onActionEnd={handleActionEnd}
         >
-          {placemarkGeometry && (
-            <Placemark
-              geometry={placemarkGeometry}
-              options={{
-                iconLayout: "default#image",
-                iconImageHref: "/images/PIN.png",
-                iconImageSize: [36, 60],
-                iconImageOffset: [-15, -40],
-              }}
-            />
-          )}
+          {/*{placemarkGeometry && (*/}
+          {/*  <Placemark*/}
+          {/*    geometry={placemarkGeometry}*/}
+          {/*    options={{*/}
+          {/*      iconLayout: "default#image",*/}
+          {/*      iconImageHref: "/images/PIN.png",*/}
+          {/*      iconImageSize: [36, 60],*/}
+          {/*      iconImageOffset: [-15, -40],*/}
+          {/*    }}*/}
+          {/*  />*/}
+          {/*)}*/}
           <ZoomControl options={{ float: "right" }} />
           <GeolocationControl
             options={{ float: "right" }}
@@ -51,6 +95,7 @@ const MapWithPlacemark = ({ onLocationSelect }) => {
           />
         </Map>
       </YMaps>
+      <img alt={"map-marker"} src={"/images/PIN.png"} className={`placemark ${placemarkClass}`} width={46} height={93} />
     </div>
   );
 };

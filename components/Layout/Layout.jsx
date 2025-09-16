@@ -34,6 +34,11 @@ const Layout = ({ children }) => {
   useEffect(() => {
     dispatch(changeLangStartModal());
     dispatch(changeSliderModal());
+    const paths = router.route.split("/");
+    if (paths.includes("orders") && paths.includes("create")) {
+      setLayoutComponents(false);
+      document.body.classList.add("reset");
+    }
     setTimeout(() => {
       setActive(false);
     }, 500);
@@ -44,9 +49,11 @@ const Layout = ({ children }) => {
       const paths = url.split("/");
       if (paths.includes("orders") && paths.includes("create")) {
         setLayoutComponents(false);
+        document.body.classList.add("reset");
         return;
       }
       setLayoutComponents(true);
+      document.body.classList.remove("reset");
     };
 
     router.events.on("routeChangeStart", handleRouteChange);

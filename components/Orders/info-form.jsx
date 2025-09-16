@@ -3,11 +3,11 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useIntl } from "react-intl";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import useSWR from "swr";
 import { Dropdown, File } from "..";
 // import Selection from "./components/selection";
-import Button from "../Forms/button";
+// import Button from "../Forms/button";
 // import { changeOrderImages } from "../../redux/slice/settings";
 import { useFiles } from "@/context/useFiles";
 import toast from "react-hot-toast";
@@ -17,22 +17,22 @@ import MobileButton from "@/components/Forms/mobileButton";
 export default function InfoForm() {
   const intl = useIntl();
   const router = useRouter();
-  const [reqLoading, setReqLoading] = useState(false);
+  // const [reqLoading, setReqLoading] = useState(false);
   const { info } = useSelector((state) => state.settings);
   const { currentOrder } = useSelector((state) => state.modals);
-  const [formError, setFormError] = useState(null);
+  const [formError] = useState(null);
   // const [errors, setErrors] = useState(null);
   const {
     register,
     handleSubmit,
-    formState: { errors, isDirty },
-    reset,
+    // formState: { errors, isDirty },
+    // reset,
   } = useForm({
     defaultValues: {
       relative_id: "",
     },
   });
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { setFiles } = useFiles();
 
   const { data: relatives } = useSWR(
@@ -72,7 +72,7 @@ export default function InfoForm() {
       localStorage.setItem(
         "orderRelativePerson",
         JSON.stringify(
-          relatives?.data?.find((item) => item.id == data?.relative_id),
+          relatives?.data?.find((item) => item.id === data?.relative_id),
         ),
       );
       router.push(`/${router.locale}/orders/create/second-step`);

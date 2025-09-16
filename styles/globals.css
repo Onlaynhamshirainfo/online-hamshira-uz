@@ -220,6 +220,23 @@ img {
     cursor: pointer;
 }
 
+.placemark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  pointer-events: none;
+  transition: all 0.2s;
+}
+
+.placemark-default {
+  transform: translate(-50%, -100%);
+}
+
+.placemark-action {
+  transform: translate(-50%, -120%);
+}
+
 @media (max-width: 450px) {
     /*body {*/
     /*    height: 100vh;*/
@@ -234,13 +251,16 @@ img {
     /*    padding-bottom: 135px;*/
     /*}*/
 
-    /*.mobile-fixed {*/
-    /*    position: fixed;*/
-    /*    bottom: 100px;*/
-    /*    left: 20px;*/
-    /*    right: 20px;*/
-    /*    width: calc(100% - 40px);*/
-    /*}*/
+    .mobile-fixed {
+        position: fixed;
+        bottom: 35px;
+        left: 20px;
+        right: 20px;
+        width: calc(100% - 40px);
+    }
+  .reset {
+    padding: 0;
+  }
 }
 
 @layer utilities {

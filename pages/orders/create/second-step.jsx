@@ -3,18 +3,41 @@ import Seo from "../../../components/Seo/Seo";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { CurrentMap, InfoForm, Loader, ReturnBack } from "../../../components";
-import { useEffect } from "react";
-import { getActiveOrderFromLocal } from "../../../redux/slice/modals";
+import {useEffect, useState} from "react";
+import { getActiveOrderFromLocal } from "@/redux/slice/modals";
 import CancelOrder from "../../../components/Helper/cancel-order";
 
 export default function SecondStep() {
   const router = useRouter();
   const intl = useIntl();
-  const { active, currentOrder } = useSelector((state) => state.modals);
+  // const { active, currentOrder } = useSelector((state) => state.modals);
+  const [mapHeight, setMapHeight] = useState(0);
+
   const dispatch = useDispatch();
+  function remToPx(rem) {
+    const rootFontSize = parseFloat(
+      getComputedStyle(document.documentElement).fontSize
+    );
+    return rem * rootFontSize;
+  }
+
+
+
+  function resizeListener() {
+    const back = document.querySelector(".header-back-container");
+    const loader = document.querySelector(".map-loader");
+    const btn = document.querySelector(".map-btn");
+    const space = remToPx(1.75);
+    setMapHeight(window.innerHeight - (back.clientHeight + loader.clientHeight + btn.clientHeight + 35 + (space * 4)));
+  }
 
   useEffect(() => {
+    const handleResize = () => resizeListener();
     dispatch(getActiveOrderFromLocal());
+    window.addEventListener("resize", handleResize);
+    resizeListener();
+
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
@@ -34,7 +57,7 @@ export default function SecondStep() {
           </div> */}
           <CancelOrder url="orders/create/first-step/" isRouter/>
           <Loader per={"50%"}/>
-          <CurrentMap />
+          <CurrentMap mapHeight={mapHeight} />
         </div>
       </main>
     </>
