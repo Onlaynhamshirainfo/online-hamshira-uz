@@ -221,26 +221,26 @@ img {
 }
 
 @media (max-width: 450px) {
-    body {
-        height: 100vh;
-        overflow: hidden;
-    }
+    /*body {*/
+    /*    height: 100vh;*/
+    /*    overflow: hidden;*/
+    /*}*/
 
-    .main-container {
-        display: grid;
-        grid-template-rows: auto 1fr;
-        height: 100vh;
-        overflow-x: scroll;
-        padding-bottom: 135px;
-    }
+    /*.main-container {*/
+    /*    display: grid;*/
+    /*    grid-template-rows: auto 1fr;*/
+    /*    height: 100vh;*/
+    /*    overflow-x: scroll;*/
+    /*    padding-bottom: 135px;*/
+    /*}*/
 
-    .mobile-fixed {
-        position: fixed;
-        bottom: 100px;
-        left: 20px;
-        right: 20px;
-        width: calc(100% - 40px);
-    }
+    /*.mobile-fixed {*/
+    /*    position: fixed;*/
+    /*    bottom: 100px;*/
+    /*    left: 20px;*/
+    /*    right: 20px;*/
+    /*    width: calc(100% - 40px);*/
+    /*}*/
 }
 
 @layer utilities {

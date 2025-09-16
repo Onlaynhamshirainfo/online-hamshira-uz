@@ -6,12 +6,13 @@ import { useIntl } from "react-intl";
 import { useDispatch, useSelector } from "react-redux";
 import useSWR from "swr";
 import { Dropdown, File } from "..";
-import Selection from "./components/selection";
+// import Selection from "./components/selection";
 import Button from "../Forms/button";
-import { changeOrderImages } from "../../redux/slice/settings";
-import { useFiles } from "../../context/useFiles";
+// import { changeOrderImages } from "../../redux/slice/settings";
+import { useFiles } from "@/context/useFiles";
 import toast from "react-hot-toast";
-import { data } from "autoprefixer";
+import MobileButton from "@/components/Forms/mobileButton";
+// import { data } from "autoprefixer";
 
 export default function InfoForm() {
   const intl = useIntl();
@@ -139,7 +140,9 @@ export default function InfoForm() {
         title={intl.formatMessage({ id: "moreImages" })}
         getImages={handleGetImages}
       />
-      <Button type="submit">{intl.formatMessage({ id: "continue" })}</Button>
+      <MobileButton type="submit">
+        {intl.formatMessage({ id: "continue" })}
+      </MobileButton>
     </form>
   );
 }

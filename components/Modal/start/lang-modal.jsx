@@ -25,7 +25,8 @@ export default function LangModalStart() {
     <Wrapper
       active={langStartModal}
       func={() => dispatch(toggleLangStartModal())}
-      type={"lang"}>
+      type={"lang"}
+    >
       <div className="flex flex-col gap-4 w-10/12 sm:w-9/12">
         {langs?.map((item, index) => {
           return (
@@ -33,7 +34,8 @@ export default function LangModalStart() {
               href={`/${item?.short}${router.asPath}`}
               key={index}
               locale={item}
-              onClick={() => changeLanguage()}>
+              onClick={() => changeLanguage()}
+            >
               <Button>{item?.name}</Button>
             </a>
           );

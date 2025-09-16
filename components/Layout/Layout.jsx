@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeLangStartModal, changeSliderModal } from "@/redux/slice/modals";
 import AdsModal from "../Modal/start/ads-modal";
 import CancelOrdering from "../Modal/cancel-ordering";
+import { useRouter } from "next/router";
 
 const Layout = ({ children }) => {
   const dispatch = useDispatch();
@@ -26,6 +27,9 @@ const Layout = ({ children }) => {
     (state) => state.modals,
   );
   const [active, setActive] = useState(true);
+  const [layoutComponents, setLayoutComponents] = useState(true);
+
+  const router = useRouter();
 
   useEffect(() => {
     dispatch(changeLangStartModal());
@@ -34,6 +38,23 @@ const Layout = ({ children }) => {
       setActive(false);
     }, 500);
   }, []);
+
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      const paths = url.split("/");
+      if (paths.includes("orders") && paths.includes("create")) {
+        setLayoutComponents(false);
+        return;
+      }
+      setLayoutComponents(true);
+    };
+
+    router.events.on("routeChangeStart", handleRouteChange);
+
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChange);
+    };
+  }, [router]);
 
   return (
     <>
@@ -94,7 +115,7 @@ const Layout = ({ children }) => {
       <div className="wrapper">
         <div className="app relative z-0 main-container">
           {/* Header */}
-          <Header />
+          {layoutComponents ? <Header /> : <></>}
 
           {active ? (
             <LoaderPage />
@@ -103,7 +124,7 @@ const Layout = ({ children }) => {
           )}
 
           {/* Footer */}
-          <Footer />
+          {layoutComponents ? <Footer /> : <></>}
         </div>
       </div>
 
