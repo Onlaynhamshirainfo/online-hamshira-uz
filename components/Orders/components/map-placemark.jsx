@@ -11,8 +11,8 @@ const MapWithPlacemark = ({ onLocationSelect, mapHeight = 0 }) => {
   const [placemarkGeometry, setPlacemarkGeometry] = useState(null);
   const [placemarkClass, setPlaceMarkClass] = useState("default-placemark");
   const [location, setLocation] = useState({
-    latitude: 40.9,
-    longitude: 69.9,
+    latitude: 41.309904782261114,
+    longitude: 69.27991414120805,
   });
 
   // const handleMapClick = (event) => {
@@ -31,6 +31,7 @@ const MapWithPlacemark = ({ onLocationSelect, mapHeight = 0 }) => {
     const mapInstance = event.get('target');
     const newCenter = mapInstance.getCenter(); // Получаем центр карты
     setPlacemarkGeometry(newCenter);
+    console.log(newCenter)
     onLocationSelect(newCenter);
   };
 
