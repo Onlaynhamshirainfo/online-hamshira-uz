@@ -25,10 +25,12 @@ export default function FirstStep() {
         key={"onlayn hamshira , onlayn , hamshira"}
       />
       <main className="container">
-        <div className="flex flex-col gap-7 py-5">
-          {/*<CancelOrder />*/}
-          <Loader per={"25%"} />
-          <InfoForm />
+        <div className={"pb-[75px] md:p-0"}>
+          <div className="flex flex-col gap-7 py-5">
+            {/*<CancelOrder />*/}
+            <Loader per={"25%"} />
+            <InfoForm />
+          </div>
         </div>
       </main>
     </>

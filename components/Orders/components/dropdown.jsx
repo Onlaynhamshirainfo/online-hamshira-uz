@@ -303,7 +303,7 @@ export default function Dropdown({
               isLogo
                 ? title || activeInfo?.name
                 : activeInfo?.name ||
-                  `${JSON.parse(localStorage.getItem("auth__info")).first_name} ${JSON.parse(localStorage.getItem("auth__info")).last_name}` /* intl.formatMessage({ id: "me" })} */
+                  `${JSON.parse(localStorage.getItem("auth__info"))?.first_name} ${JSON.parse(localStorage.getItem("auth__info"))?.last_name}` /* intl.formatMessage({ id: "me" })} */
             }
           </div>
           <SelectIcon isActive={active} />
