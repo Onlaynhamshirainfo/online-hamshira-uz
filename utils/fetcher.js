@@ -1,4 +1,7 @@
 // auth fetcher
+import {getItemsFromLocal} from "@/redux/slice/settings";
+import {useDispatch} from "react-redux";
+
 function updateOptions(options) {
   const update = {
     ...options,
@@ -35,5 +38,5 @@ export default function fetcher(url = "", options = {}, params = {}) {
       localStorage.removeItem("auth__info");
     }
     return res.json();
-  });
+  })
 }

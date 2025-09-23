@@ -8,7 +8,6 @@ import {
 } from "../../components";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
 export default function Profile() {
   const router = useRouter();
   const intl = useIntl();

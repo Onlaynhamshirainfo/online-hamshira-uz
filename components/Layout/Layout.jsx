@@ -20,6 +20,9 @@ import { changeLangStartModal, changeSliderModal } from "@/redux/slice/modals";
 import AdsModal from "../Modal/start/ads-modal";
 import CancelOrdering from "../Modal/cancel-ordering";
 import { useRouter } from "next/router";
+import {getItemsFromLocal} from "@/redux/slice/settings";
+import {SWRConfig} from "swr";
+import fetcher from "@/utils/fetcher";
 
 const Layout = ({ children }) => {
   const dispatch = useDispatch();
@@ -119,21 +122,36 @@ const Layout = ({ children }) => {
       {/* <Sprites /> */}
 
       {/* Body */}
-      <div className="wrapper">
-        <div className="app relative z-0 main-container">
-          {/* Header */}
-          {layoutComponents ? <Header /> : <></>}
+      <SWRConfig value={{
+        fetcher,
+        onSuccess: (data) => {
+          if (data.status === 401) {
+            dispatch(getItemsFromLocal());
+          }
+        },
+        onError: (err) => {
+          if (err.message === "Unauthorized") {
+            dispatch(getItemsFromLocal());
+          }
+        },
+      }}>
+        <div className="wrapper">
+          <div className="app relative z-0 main-container">
+            {/* Header */}
+            {layoutComponents ? <Header /> : <></>}
 
-          {active ? (
-            <LoaderPage />
-          ) : (
-            <div className="content-wrapper">{children}</div>
-          )}
+            {active ? (
+              <LoaderPage />
+            ) : (
+              <div className="content-wrapper">{children}</div>
+            )}
 
-          {/* Footer */}
-          {layoutComponents ? <Footer /> : <></>}
+            {/* Footer */}
+            {layoutComponents ? <Footer /> : <></>}
+          </div>
         </div>
-      </div>
+      </SWRConfig>
+
 
       <RegisterModal />
       <CodeModal />

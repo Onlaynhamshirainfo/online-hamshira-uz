@@ -1,4 +1,4 @@
-import { Provider } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import "../public/styles/nprogress.css";
 import "../styles/globals.css";
 import store from "../redux/store/store";
@@ -9,7 +9,7 @@ import messages_ru from "../lang/ru.json";
 import messages_en from "../lang/en.json";
 import { IntlProvider } from "react-intl";
 import { LangProvider } from "@/context/useLang";
-import { useState } from "react";
+import {useState} from "react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { SkeletonTheme } from "react-loading-skeleton";
@@ -17,6 +17,8 @@ import NProgress from "nprogress";
 import { initCollapse } from "@/utils/collapse";
 import "react-loading-skeleton/dist/skeleton.css";
 import { FilesProvider } from "@/context/useFiles";
+import {SWRConfig} from "swr";
+import {getItemsFromLocal} from "@/redux/slice/settings";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
@@ -81,6 +83,7 @@ export default function App({ Component, pageProps }) {
 
   return (
     <Provider store={store}>
+
       <IntlProvider
         locale={router.locale}
         defaultLocale={router.defaultLocale}

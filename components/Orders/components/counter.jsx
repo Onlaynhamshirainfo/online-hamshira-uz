@@ -9,7 +9,7 @@ import {
 
 export default function Counter({
   serviceId,
-  count = 1,
+  count = 0,
   price,
   current,
   id,
@@ -24,7 +24,7 @@ export default function Counter({
   const handleClick = (type) => {
     if(type == 'plus' && currentCount == 10) return;
     // toast.error(intl.formatMessage({ id: "servicesSelect" }));
-    if (type === "minus" && currentCount > 1) {
+    if (type === "minus" && currentCount > 0) {
       const newCount = currentCount - 1;
       const newPrice = newCount * price;
       setCurrentCount(newCount);
