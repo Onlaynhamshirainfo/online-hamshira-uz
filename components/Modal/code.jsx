@@ -30,9 +30,10 @@ export default function CodeModal() {
           "/client/confirm?expand=contact.branch",
           {
             code: values,
-            auth_key: localStorage.getItem("auth__key"),
+            auth_key: localStorage.getItem("auth_submit_key"),
           }
         );
+        localStorage.removeItem("auth_submit_key");
         localStorage.setItem(
           "auth__info",
           JSON.stringify(response?.data?.data)

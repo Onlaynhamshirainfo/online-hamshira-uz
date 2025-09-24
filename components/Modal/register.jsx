@@ -40,7 +40,7 @@ export default function RegisterModal() {
         phone: `+${cleanedPhone}`,
       });
 
-      localStorage.setItem("auth__key", response?.data?.data?.auth_key);
+      localStorage.setItem("auth_submit_key", response?.data?.data?.auth_key);
       localStorage.setItem("auth__phone", cleanedPhone);
 
       toast.success(intl.formatMessage({ id: "phoneSend" }));
