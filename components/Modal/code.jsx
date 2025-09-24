@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   toggleCodeModal,
   toggleInfoModal,
-} from "../../redux/slice/modals";
+} from "@/redux/slice/modals";
 import { useIntl } from "react-intl";
 import { useRouter } from "next/router";
 import axios from "../../utils/axios";
 import toast from "react-hot-toast";
 import CodeInputs from "./components/code-inputs";
-import { getItemsFromLocal } from "../../redux/slice/settings";
+import { getItemsFromLocal } from "@/redux/slice/settings";
 import { Error } from "..";
 
 export default function CodeModal() {
