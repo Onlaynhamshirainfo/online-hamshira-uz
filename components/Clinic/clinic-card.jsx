@@ -3,12 +3,13 @@ import React from "react";
 import Stars from "./stars";
 import Image from "next/image";
 import { useSelector } from "react-redux";
+import Link from "next/link";
 
 export default function ClinicCard({ data }) {
   const router = useRouter();
   const { info } = useSelector((state) => state.settings);
   return (
-    <a
+    <Link
       href={`/${router.locale}/clinics/page/${data?.id}/${info?.contact?.branch?.id}`}
       className="flex flex-row items-center gap-3 bg-white p-3 sm:p-5 rounded-3xl">
       <span className="w-16 h-16 rounded-2xl bg-indigo-100 flex items-center justify-center">
@@ -114,6 +115,6 @@ export default function ClinicCard({ data }) {
         </span>
         <Stars count={data?.star} />
       </span>
-    </a>
+    </Link>
   );
 }

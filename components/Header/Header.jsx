@@ -1,9 +1,8 @@
 import { useIntl } from "react-intl";
-import UserIcon from "../Icons/user";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleRegisterModal } from "../../redux/slice/modals";
+import { toggleRegisterModal } from "@/redux/slice/modals";
 import { useEffect } from "react";
-import { getItemsFromLocal } from "../../redux/slice/settings";
+import { getItemsFromLocal } from "@/redux/slice/settings";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -36,28 +35,24 @@ export default function Header() {
           title={intl.formatMessage({ id: "company" })}
           className="block w-[180px] sm:w-[240px] pointer"
         >
-          <a>
-            <Image
-              src="/images/logo.svg"
-              alt="logo"
-              title={intl.formatMessage({ id: "company" })}
-              width={200}
-              height={60}
-              // blurdataurl="data:image/jpeg ,data:image/png , data:image/svg "
-              // placeholder="blur"
-            />
-          </a>
+          <Image
+            src="/images/logo.svg"
+            alt="logo"
+            title={intl.formatMessage({ id: "company" })}
+            width={200}
+            height={60}
+            // blurdataurl="data:image/jpeg ,data:image/png , data:image/svg "
+            // placeholder="blur"
+          />
         </Link>
         {info ? (
-          <Link href={`/${router.locale}/profile`}>
-            <a className="w-12 h-12 overflow-hidden rounded-full full__image cursor-pointer">
-              <Image
-                src={`${process.env.NEXT_PUBLIC_IMAGE_BASE}${info?.photo}`}
-                width={0}
-                height={0}
-                layout="responsive"
-              />
-            </a>
+          <Link href={`/${router.locale}/profile`} className="w-12 h-12 overflow-hidden rounded-full full__image cursor-pointer">
+            <Image
+              src={`${process.env.NEXT_PUBLIC_IMAGE_BASE}${info?.photo}`}
+              width={0}
+              height={0}
+              layout="responsive"
+             alt={"Page_icon"}/>
           </Link>
         ) : (
           <button

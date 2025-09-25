@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
+  // swcMinify: true,
   i18n: {
     defaultLocale: "uz",
     localeDetection: false,
@@ -14,7 +14,12 @@ const nextConfig = {
   // },
   images: {
     // like ['domen.uz']
-    domains: ["dashboard.onlaynhamshira.uz"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "dashboard.onlaynhamshira.uz"
+      }
+    ],
   },
   env: {
     // like base url

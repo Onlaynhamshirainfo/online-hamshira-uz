@@ -27,12 +27,12 @@ function page({ info, params }) {
             width={0}
             height={0}
             layout="responsive"
-          />
+           alt={"Page_image"}/>
 
           {/* save */}
           <button
             className={`w-14 h-14 rounded-full ${
-              news?.find((item) => item.id == info?.id) ? "linear" : "bg-grey-3"
+              news?.find((item) => item.id === info?.id) ? "linear" : "bg-grey-3"
             } absolute top-5 right-5 flex flex-row items-center justify-center shadow-xl`}
             onClick={() => changeFn()}>
             <svg

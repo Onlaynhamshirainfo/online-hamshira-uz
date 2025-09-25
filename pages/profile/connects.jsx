@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import useSWR from "swr";
 import fetcher from "../../utils/fetcher";
+import Link from "next/link";
 
 export default function Connects() {
   const router = useRouter();
@@ -45,7 +46,7 @@ export default function Connects() {
                 {intl.formatMessage({ id: "connects" })}
               </h1>
             </div>
-            <a
+            <Link
               href={`/${router.locale}/profile/connects-add`}
               className="text-sm leading-normal block sm:bg-text-primary sm:py-2 sm:px-4 text-white rounded-full"
             >
@@ -66,7 +67,7 @@ export default function Connects() {
                   />
                 </svg>
               </span>
-            </a>
+            </Link>
           </div>
           {!relatives?.data || relatives?.data?.length == 0 ? (
             <p className="text-center text-text-secondary">

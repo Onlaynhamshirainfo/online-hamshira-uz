@@ -23,6 +23,7 @@ function page({ info, params }) {
             width={0}
             height={0}
             layout="responsive"
+            alt={"page_icon"}
           />
           <a
             href="#maps"
