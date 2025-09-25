@@ -2,7 +2,7 @@ import { useIntl } from "react-intl";
 import axios from "../../utils/axios";
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { DateTranslate } from "../../utils/date";
 import { ReturnBack } from "../../components";
 import { useDispatch, useSelector } from "react-redux";

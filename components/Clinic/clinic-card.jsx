@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React from "react";
 import Stars from "./stars";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 

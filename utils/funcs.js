@@ -2,7 +2,7 @@ export const thousandSeperate = (data = '') => {
 	return data
 		.toString()
 		.replace(/\s/g, '')
-		.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+		.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 }
 
 export const roundPrice = (price, duration) => {

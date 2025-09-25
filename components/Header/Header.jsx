@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleRegisterModal } from "@/redux/slice/modals";
 import { useEffect } from "react";
 import { getItemsFromLocal } from "@/redux/slice/settings";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useRouter } from "next/router";
 import Link from "next/link";
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { SelectIcon } from "../..";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useIntl } from "react-intl";
 import CounterCheckbox from "./counter-checkbox";
 

@@ -2,7 +2,7 @@ import {
   toggleOrderTypeModal,
   toggleRegisterModal,
 } from "../../redux/slice/modals";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useRouter } from "next/router";
 import React from "react";
 import toast from "react-hot-toast";

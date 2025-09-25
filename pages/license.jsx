@@ -1,6 +1,6 @@
 import { useIntl } from "react-intl";
 import Seo from "../components/Seo/Seo";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import useSWR from "swr";
 import fetcher from "../utils/fetcher";
 import { useRouter } from "next/router";

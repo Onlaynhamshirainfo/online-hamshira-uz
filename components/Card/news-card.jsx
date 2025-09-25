@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { DateTranslate } from "../../utils/date";
+import { DateTranslate } from "@/utils/date";
 import React from "react";
 import Link from "next/link";
 
@@ -8,14 +8,14 @@ export default function NewsCard({ data }) {
   return (
     <Link
       href={`/${router.locale}/news/${data?.id}`}
-      className="w-full flex flex-col gap-3 items-start bg-white p-8 rounded-2xl">
+      className="w-full flex flex-col gap-3 items-start bg-white p-8 rounded-2xl text-ellipsis">
       <span className="px-3 py-2 linear rounded-full text-sm text-white">
         {DateTranslate(data?.created_at)}
       </span>
       <h2 className="text-text-primary leading-normal font-semibold text-lg">
         {data?.title}
       </h2>
-      <p className="text-text-secondary leading-normal font-normal text-base line-clamp-2">
+      <p className="text-text-secondary leading-normal font-normal text-base line-clamp-2 max-w-full">
         {data?.description}
       </p>
       {/* <p
