@@ -107,7 +107,7 @@
   "orderEmpty": "You have no orders yet.",
   "quitBody": "Are you sure you want to log out of your profile ?",
   "--Time": "",
-  "chooseDate": "Arrival time",
+  "chooseDate": "Arrival time ",
   "allDate": "During today",
   "currentDate": "At the right time",
   "nowDate": "For now",

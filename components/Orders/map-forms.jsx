@@ -133,7 +133,7 @@ export default function InfoForm() {
             register={register}
             errors={formError}
             required={false}
-            title={intl.formatMessage({ id: "chooseDate" })}
+            title={`${intl.formatMessage({ id: "chooseDate" })} <div class="required_icon">*</div>`}
             getArrivalTypes={(types) => setMoreInputs(types)}
           />
           {moreInputs ? (

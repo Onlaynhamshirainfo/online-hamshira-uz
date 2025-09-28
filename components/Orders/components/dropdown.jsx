@@ -106,9 +106,7 @@ export default function Dropdown({
             className="flex flex-row items-center justify-between cursor-pointer p-5"
             onClick={() => setActive((prev) => !prev)}
           >
-            <div className="flex flex-row items-center gap-4">
-              {activeInfo?.name || title}
-            </div>
+            <div className="flex flex-row items-center justify-start" dangerouslySetInnerHTML={{__html: activeInfo?.name || title}}></div>
             <SelectIcon isActive={active} />
           </div>
 

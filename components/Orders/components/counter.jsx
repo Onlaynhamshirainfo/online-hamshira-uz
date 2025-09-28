@@ -4,7 +4,7 @@ import { useIntl } from "react-intl";
 import { useDispatch, useSelector } from "react-redux";
 import {
   changePriceByButtons,
-  handleTotalSum,
+  handleTotalSum, removeFromCurrentPrice,
 } from "../../../redux/slice/services";
 
 export default function Counter({
@@ -18,46 +18,62 @@ export default function Counter({
 }) {
   const intl = useIntl();
   const dispatch = useDispatch();
-  const [currentPrice, setCurrentPrice] = useState(price * count);
+  const [currentPrice, setCurrentPrice] = useState(count ? price * count : price);
   const [currentCount, setCurrentCount] = useState(count);
 
   const handleClick = (type) => {
     if(type == 'plus' && currentCount == 10) return;
     // toast.error(intl.formatMessage({ id: "servicesSelect" }));
+    let nc;
     if (type === "minus" && currentCount > 0) {
       const newCount = currentCount - 1;
-      const newPrice = newCount * price;
+      nc = newCount;
+      if (!newCount) {
+        setActive(false);
+      }
+      const newPrice = newCount ? currentCount * price : price;
       setCurrentCount(newCount);
       setCurrentPrice(newPrice);
-      dispatch(
-        changePriceByButtons({
-          serviceId,
-          count: newCount,
-          price: newPrice,
-          id,
-          name: name,
-        })
-      );
+
+      if (nc === 0) {
+        dispatch(removeFromCurrentPrice(id));
+      } else if (nc > 0) {
+        dispatch(
+          changePriceByButtons({
+            serviceId,
+            count: newCount,
+            price: newCount ? newPrice : 0,
+            id,
+            name: name,
+          })
+        );
+      }
       dispatch(handleTotalSum());
     } else if (type === "plus") {
       const newCount = currentCount + 1;
+      nc = newCount;
       const newPrice = newCount * price;
       setCurrentCount(newCount);
       setCurrentPrice(newPrice);
-      dispatch(
-        changePriceByButtons({
-          serviceId,
-          count: newCount,
-          price: newPrice,
-          id,
-          name: name,
-        })
-      );
+
+      if (nc === 0) {
+        dispatch(removeFromCurrentPrice(id));
+      } else if (nc > 0) {
+        dispatch(
+          changePriceByButtons({
+            serviceId,
+            count: newCount,
+            price: newPrice,
+            id,
+            name: name,
+          })
+        );
+      }
       dispatch(handleTotalSum());
     }
-    setTimeout(() => {
+    if (nc > 0) {
       setActive(true);
-    }, 0);
+    }
   };
 
   // useEffect(() => {

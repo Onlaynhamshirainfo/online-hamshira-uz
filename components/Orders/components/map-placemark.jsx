@@ -31,7 +31,6 @@ const MapWithPlacemark = ({ onLocationSelect, mapHeight = 0 }) => {
     const mapInstance = event.get('target');
     const newCenter = mapInstance.getCenter(); // Получаем центр карты
     setPlacemarkGeometry(newCenter);
-    console.log(newCenter)
     onLocationSelect(newCenter);
   };
 
@@ -53,6 +52,7 @@ const MapWithPlacemark = ({ onLocationSelect, mapHeight = 0 }) => {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
           });
+          onLocationSelect([position.coords.latitude, position.coords.longitude]);
         },
         (err) => {
           // setError(err.message);
